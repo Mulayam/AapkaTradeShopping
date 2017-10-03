@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.aapkatrade.shopping">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".login.LoginActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".login.RegistrationActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".dashboard.DashboardActivity" />
+        <activity android:name=".discover.DiscoverActivity" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="533d25208d92e11753e3c7fac13e423ec262fa6b" />
+
+        <activity android:name=".json.ShowBookDetails" />
+        <activity android:name=".json.ManActivity" />
+        <activity android:name=".jsonclass.Woman" />
+        <activity android:name=".search.SearchActivity" />
+        <activity android:name=".category.CategoryActivity" />
+        <activity
+            android:name=".productdetail.ProductDetailActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".checkout.CheckoutActivity1"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".checkout.CheckoutActivity2"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".Editprofile.Edit_profile_activity" />
+        <activity android:name=".ProductCategory.Productlist_category_activity" />
+        <activity android:name=".Account.User_account" />
+        <activity android:name=".Account.Reviews.Review" />
+        <activity android:name=".Account.My_orders.My_orders" />
+        <activity android:name=".Account.Mywishlist.MyWishlist_activity" />
+        <activity android:name=".Account.Address.My_address_activity" />
+        <activity android:name=".Account.Reviews.Review_data" />
+        <activity android:name=".Add_to_cart.Add_to_card_activity" />
+        <activity android:name=".ChangePassword.change_password" />
+        <activity android:name=".login.Forgot_password" />
+        <activity android:name=".Helpcenter.Help_center" />
+        <activity
+            android:name=".ProductCategory.Show_subcategory.viewall_subcategory.Viewall_subcategory"
+            android:label="@string/title_activity_viewall_subcategory"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ProductCategory.Top_brands.viewall_topbrands.viewall_top_brands" />
+        <activity
+            android:name=".ProductCategory.Flat_offers.viewall_flatoffers.View_all_flat_offers"
+            android:label="@string/title_activity_view_all_flat_offers"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Account.My_orders.Myorders_details.Myorder_details"
+            android:label="@string/title_activity_myorder_details"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ProductCategory.Top_selling.top_selling_viewall.Topselling_viewall" />
+        <activity android:name=".ProductCategory.sub_category_brands_offers.sub_category_viewall_offer.Viewall_offer_all"></activity>
+    </application>
+
+</manifest>

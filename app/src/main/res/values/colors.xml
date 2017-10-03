@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ed4812</color>
+    <color name="colorPrimaryDark">#a9320b</color>
+    <color name="colorAccent">#009688</color>
+    <color name="black">#000000</color>
+    <color name="grey">#d1cece</color>
+    <color name="grey_transparent">#daaba8a8</color>
+    <color name="white">#ffffff</color>
+    <color name="greentranparent">#a4407805</color>
+    <color name="red">#e40e0e</color>
+    <color name="footer">#d97ba5</color>
+    <color name="colorPrimary1">#99009688</color>
+    <color name="green">#2a990b</color>
+    <color name="statusbar_splash">#347fb1</color>
+    <color name="statusbar_nointernet">#d4c7c7</color>
+    <color name="colorPrimaryText">#515151</color>
+    <color name="colorSecondaryText">#727272</color>
+    <color name="colorText">#FFFFFF</color>
+    <color name="colorDivider">#B6B6B6</color>
+    <color name="textviewBackground1">#ef1940</color>
+    <color name="colorPrimaryLight">#f55b28</color>
+    <color name="greendark">#185807</color>
+    <color name="twitter">#42b1ec</color>
+    <color name="greydark">#787575</color>
+    <color name="md_blue_grey_50">#ECEFF1</color>
+    <color name="blue">#44a2ea</color>
+    <color name="black_transparent">#96000000</color>
+    <color name="white_transparent">#73d2cdcd</color>
+    <color name="screen_background">#E7E7E7</color>
+    <color name="transparent">#00000000</color>
+    <color name="green_transparent">#0063BEAC</color>
+</resources>

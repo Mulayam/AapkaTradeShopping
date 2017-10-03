@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.aapkatrade.shopping.Editprofile.Edit_profile_activity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/app_bar" />
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#E8E8E8"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+
+
+
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:weightSum="10"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_weight="2.5"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="0dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/david"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="1dp"
+                    android:id="@+id/imageView2"
+                    android:layout_gravity="center_horizontal|center_vertical" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="2"
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                >
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_First_Name"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="5dp"
+                    app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/input_fname"
+                        style="@style/StyledTilEditText"
+                        android:layout_width="match_parent"
+                      android:layout_margin="5dp"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#E8E8E8"
+                        android:hint="First Name" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="0dp">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_Last_name"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/input_lname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#E8E8E8"
+                        android:singleLine="true"
+                        style="@style/StyledTilEditText"
+                        android:hint="Last Name" />
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="0dp">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_dateofbirth"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/input_dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#E8E8E8"
+                        android:singleLine="true"
+                        style="@style/StyledTilEditText"
+                        android:hint="Date Of Birth" />
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_weight="1.5"
+                android:weightSum="2"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="0dp">
+
+
+
+
+
+
+
+                        <Button
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Submit"
+                            android:textColor="#FFF"
+                            android:paddingRight="50dp"
+                           android:paddingLeft="50dp"
+                            android:background="#32b181"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/button"
+                            android:layout_gravity="center_horizontal" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
+

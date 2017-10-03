@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+android:layout_margin="5dp"
+    android:gravity="center"
+android:background="@drawable/cardview_bg"
+    android:orientation="vertical">
+
+    <!--<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="5dp"-->
+<!--android:background="@drawable/cardview_bg"-->
+        <!--card_view:cardCornerRadius="4dp"-->
+        <!--android:id="@+id/cardview_viewall_subcat_single"-->
+
+        <!--android:gravity="center">-->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+android:weightSum="10"
+            android:gravity="center"
+
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:padding="2dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+          android:scaleType="fitStart"
+                    android:layout_gravity=""
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/demo_review_pic"
+                    android:id="@+id/imageView19" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="4.5"
+                android:weightSum="2"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Mens T-shirts"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textColor="#ED4D18"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/textView84"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="325 Shirts"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#555555"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/textView" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:orientation="vertical"
+                android:layout_weight="2.5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                  android:layout_centerVertical="true"
+              android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+
+                    android:id="@+id/imageView26" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    <!--</android.support.v7.widget.CardView>-->
+    </LinearLayout>

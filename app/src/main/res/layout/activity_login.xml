@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:weightSum="100"
+    tools:context="com.aapkatrade.shopping.login.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:src="@drawable/logo" />
+
+        </LinearLayout>
+
+        <com.twitter.sdk.android.core.identity.TwitterLoginButton
+            android:id="@+id/twitter_login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="80"
+            android:background="@color/colorPrimary">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewWelcome"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/welcome"
+                    android:textColor="@color/colorText"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutemail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textViewWelcome"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/border_bg"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="15"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_email" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="85"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/colorText"
+                        android:textColorHint="@color/colorText"></EditText>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutpassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linearlayoutemail"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/border_bg"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="15"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_lock" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="85"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/password"
+                        android:id="@+id/password_edittext"
+                        android:inputType="textPassword"
+                        android:textColor="@color/colorText"
+                        android:textColorHint="@color/colorText"></EditText>
+                </LinearLayout>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/buttonLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_below="@+id/linearlayoutpassword"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:text="@string/login"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp"
+
+                    />
+
+                <com.andexert.library.RippleView
+                    android:id="@+id/rippleForgotPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/buttonLogin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/textViewForgotPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Forgot your password?"
+                        android:textColor="@color/colorText"
+                        android:textStyle="bold" />
+                </com.andexert.library.RippleView>
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutOr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rippleForgotPassword"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="20dp"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:text="Or Login With"
+                        android:textColor="@color/colorText" />
+
+                    <View
+                        android:layout_width="20dp"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutSocial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linearlayoutOr"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="50"
+                        android:gravity="center">
+
+
+                        <android.support.v7.widget.AppCompatButton
+                            android:layout_width="160dp"
+                            android:layout_height="60dp"
+                            android:background="@color/com_facebook_blue"
+                            android:drawableLeft="@drawable/ic_facebook"
+                            android:drawablePadding="6dp"
+                            android:gravity="left|center_vertical"
+                            android:padding="12dp"
+                            android:text="@string/facebook"
+                            android:id="@+id/buttonCustomFB"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorText"
+                            android:textSize="22sp"
+                            android:textStyle="normal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="50"
+                        android:gravity="center">
+
+
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/buttonTwitter"
+                            android:layout_width="160dp"
+                            android:layout_height="60dp"
+                            android:background="@color/twitter"
+                            android:drawableLeft="@drawable/ic_twitter"
+                            android:drawablePadding="6dp"
+                            android:gravity="left|center_vertical"
+                            android:padding="12dp"
+                            android:text="@string/twitter"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorText"
+                            android:textSize="22sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <com.andexert.library.RippleView
+                    android:id="@+id/rippleRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linearlayoutSocial"
+                    android:layout_centerHorizontal="true">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewRegistration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/register_detail"
+                            android:textColor="@color/colorText" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@color/colorText" />
+                        <com.facebook.login.widget.LoginButton
+                            android:id="@+id/login_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="30dp"
+                            android:visibility="invisible"
+                            android:layout_marginBottom="30dp" />
+                    </LinearLayout>
+                </com.andexert.library.RippleView>
+            </RelativeLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

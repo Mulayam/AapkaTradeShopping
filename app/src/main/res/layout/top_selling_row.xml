@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+android:padding="5dp"
+    android:background="#E8E8E8"
+    android:id="@+id/cardview_top_selling"
+    android:layout_margin="10dp"
+    android:gravity="center">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+
+
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="140dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/david"
+                android:id="@+id/imageView10" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/subcat_lovit"
+                android:layout_marginRight="5dp"
+                android:layout_alignParentRight="true"
+                android:id="@+id/imageView11" />
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Allen Solly"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="#ED4812"
+            android:id="@+id/textView25" />
+
+        <RatingBar
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBar"
+            android:clickable="true"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="40% off"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            android:textSize="14sp"
+            android:textColor="#ED4812"
+            android:id="@+id/textView26"
+            android:layout_gravity="right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="RS 1099"
+            android:textSize="14sp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+
+            android:id="@+id/textView27" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="RS 656"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="left"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/textView28" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

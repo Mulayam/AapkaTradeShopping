@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">EclipseExpress</string>
+    <string name="facebook_app_id">621308328026023</string>
+    <string name="welcome">Welcome to EclipseExpress</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Log in</string>
+    <string name="register_detail">Dont have an account? Register!!!</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">twitter</string>
+    <string name="confirmpassword">Confirm Password</string>
+    <string name="fname">First Name</string>
+    <string name="lname">Last Name</string>
+    <string name="mobile">Mobile Number</string>
+    <string name="getstarted">Get Started</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dashboardfragment">DashboardFragment</string>
+    <string name="wishlist">WishList</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="global_shopping"><![CDATA[Global shopping & trade starts here]]></string>
+    <string name="expressdeal">EXPRESS DEALS</string>
+    <string name="bestselling">BEST SELLING</string>
+    <string name="expresscollection">ECLIPSE EXPRESS COLLECTION</string>
+    <string name="trendingstyle">TRENDING STYLES</string>
+    <string name="allsale">ALL SALE</string>
+    <string name="search">Search</string>
+    <string name="lorem">Lorem dress product</string>
+    <string name="check_availability_option">Check availability and delivery option</string>
+    <string name="choose_color">Choose a colour for item</string>
+    <string name="ok">OK</string>
+    <string name="size_available">Size available for this item</string>
+    <string name="postal">Postal code</string>
+    <string name="url">https://netforcesales.com/eclipseexpress/</string>
+    <string name="title_activity_viewall_subcategory">Viewall_subcategory</string>
+    <string name="title_activity_view_all_flat_offers">View_all_flat_offers</string>
+    <string name="title_activity_myorder_details">Myorder_details</string>
+
+
+</resources>

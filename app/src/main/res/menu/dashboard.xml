@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/add_to_cart"
+        android:icon="@drawable/ic_cart_black"
+        android:orderInCategory="101"
+        android:title="@string/add_to_cart"
+        app:actionLayout="@layout/menu_action_item_badge"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/ic_tag"
+        android:orderInCategory="102"
+        android:title="@string/wishlist"
+        app:showAsAction="always" />
+
+</menu>

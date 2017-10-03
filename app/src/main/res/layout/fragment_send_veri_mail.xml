@@ -1,0 +1,69 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.aapkatrade.shopping.login.Send_veri_mail">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+
+        android:padding="5dp"
+
+        android:layout_marginTop="20dp"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/border_bg_grey_outline"
+            android:layout_gravity="center_horizontal" >
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Enter Email Address"
+                android:layout_margin="20dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:textColor="#626262"
+                android:id="@+id/editText19" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_check_green"
+                android:id="@+id/imageView18" />
+        </RelativeLayout>
+
+        <Button
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="Send Mail"
+            android:id="@+id/snd_to_verify"
+            android:background="@drawable/btn_bg"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Your new password send to your register mail id"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+
+            android:id="@+id/textView61"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+    <!-- TODO: Update blank fragment layout -->
+
+</FrameLayout>
