@@ -83,7 +83,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     private ExpandableListView expListView;
     private ImageView edit_profile_imgview;
     private ExpandableListAdapter listAdapter;
-    private ArrayList<String> listDataHeader;
+    private ArrayList<String> listDataHeader = null;
     private HashMap<String, List<String>> listDataChild;
     ProgressDialog _progressDialog;
 
@@ -128,16 +128,72 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
         // preparing list data
         if(Connetivity_check.isNetworkAvailable(getActivity())==true)
-        { /*prepareListData();*/}
+        { /*prepareListData();*/
+
+
+            listDataHeader = new ArrayList<>();
+            listDataChild = new HashMap<>();
+
+            // Adding child data
+            listDataHeader.add("Category");
+            listDataHeader.add("Account");
+            listDataHeader.add("Settings");
+            listDataHeader.add("Rate App");
+            listDataHeader.add("Share App");
+            listDataHeader.add("Help Centre");
+
+            // Adding child data
+            List<String> top250 = new ArrayList<String>();
+            top250.add("Woman's Clothings");
+            top250.add("Man's Clothings");
+            top250.add("Electronics");
+            top250.add("Home and Garden");
+            top250.add("Jwellery and Health");
+            top250.add("Automotive");
+            top250.add("Beauty and Health");
+            top250.add("Toys, Kids and Baby");
+            top250.add("Bags and Shoes");
+            top250.add("Sports and Outdoor");
+            top250.add("Phone and Accessories");
+            top250.add("Computer and Networking");
+            top250.add("VIEW ALL CATEGORIES");
+
+            List<String> Settings_data = new ArrayList<String>();
+            Settings_data.add("Subscription");
+            Settings_data.add("Change Password");
+
+            List<String> account = new ArrayList<String>();
+            List<String> ratethisapp = new ArrayList<String>();
+            List<String> help_center = new ArrayList<String>();
+            List<String> share_app = new ArrayList<String>();
+
+            listDataChild.put(listDataHeader.get(0), categoryname); // Header, Child data
+            listDataChild.put(listDataHeader.get(1), account); // Header, Child data
+            listDataChild.put(listDataHeader.get(2), Settings_data);
+            listDataChild.put(listDataHeader.get(3), ratethisapp); // Header, Child data
+            listDataChild.put(listDataHeader.get(4), help_center); // Header, Child data
+            listDataChild.put(listDataHeader.get(5), share_app);
+
+
+
+
+
+
+
+
+
+
+
+        }
         else
         {
             Showmessage("Their is no internet connection");
         }
 
-       /* listAdapter = new ExpandableListAdapter(context, listDataHeader, listDataChild);
+        listAdapter = new ExpandableListAdapter(context, listDataHeader, listDataChild);
         // setting list adapter
         expListView.setAdapter(listAdapter);
-        listAdapter.setClickListner(this);*/
+        listAdapter.setClickListner(this);
     }
 
     @Override
@@ -186,114 +242,73 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
 
 
-    private void prepareListData() {
-
-        if (Connetivity_check.isNetworkAvailable(getActivity()) == true)
-
-        {
-            String url = "https://netforcesales.com/eclipseexpress/web_api.php?type=category";
-            _progressDialog.show();
-
-            setupSelfSSLCert();
-            Ion.with(this)
-                    .load(url)
-                    .progressDialog(_progressDialog)
-                    .asJsonObject()
-
-                    .setCallback(new FutureCallback<JsonObject>() {
-                        @Override
-                        public void onCompleted(Exception e, JsonObject result) {
-                            if (result != null)
-
-                            {
-
-
-                                String status = result.get("status").toString();
-                                if (status.contains("success")) {
-                                    JsonObject categories = result.getAsJsonObject("result");
-
-
-                                    JsonArray personen = categories.getAsJsonArray("categories");
-                                    for (int i = 0; i < personen.size(); i++) {
-                                        JsonObject user = personen.get(i).getAsJsonObject();
-                                        String category_name = user.get("name").getAsString();
-                                        String category_id = user.get("category_id").getAsString();
-                                        categoryids.add(category_id);
-                                        categoryname.add(category_name);
-
-                                    }
-
-                                    Log.e("categoryids", categoryids.toString());
-                                    Log.e("categoryname", categoryname.toString());
-
-
-                                }
-
-                                _progressDialog.dismiss();
-
-                            } else {
-                                Log.e("error", e.toString());
-                            }
-
-//                                        JsonObject js =result;
+//    private void prepareListData() {
 //
-//                                        String status=result.get("status").toString();
-//                                        String customer_id=result.get("customer_id").toString();
-//                                        String message=result.get("message").toString();
-//                                        Log.e("status","st"+status+"cust"+customer_id+"mes"+message);
+//        if (Connetivity_check.isNetworkAvailable(getActivity()) == true)
+//
+//        {
+//            String url = "https://netforcesales.com/eclipseexpress/web_api.php?type=category";
+//            _progressDialog.show();
+//
+//            setupSelfSSLCert();
+//            Ion.with(this)
+//                    .load(url)
+//                    .progressDialog(_progressDialog)
+//                    .asJsonObject()
+//
+//                    .setCallback(new FutureCallback<JsonObject>() {
+//                        @Override
+//                        public void onCompleted(Exception e, JsonObject result) {
+//                            if (result != null)
+//
+//                            {
+//
+//
+//                                String status = result.get("status").toString();
+//                                if (status.contains("success")) {
+//                                    JsonObject categories = result.getAsJsonObject("result");
+//
+//
+//                                    JsonArray personen = categories.getAsJsonArray("categories");
+//                                    for (int i = 0; i < personen.size(); i++) {
+//                                        JsonObject user = personen.get(i).getAsJsonObject();
+//                                        String category_name = user.get("name").getAsString();
+//                                        String category_id = user.get("category_id").getAsString();
+//                                        categoryids.add(category_id);
+//                                        categoryname.add(category_name);
+//
+//                                    }
+//
+//                                    Log.e("categoryids", categoryids.toString());
+//                                    Log.e("categoryname", categoryname.toString());
+//
+//
+//                                }
+//
+//                                _progressDialog.dismiss();
+//
+//                            } else {
+//                                Log.e("error", e.toString());
+//                            }
+//
+////                                        JsonObject js =result;
+////
+////                                        String status=result.get("status").toString();
+////                                        String customer_id=result.get("customer_id").toString();
+////                                        String message=result.get("message").toString();
+////                                        Log.e("status","st"+status+"cust"+customer_id+"mes"+message);
+//
+//
+//                            // do stuff with the result or error
+//                        }
+//                    });
 
-
-                            // do stuff with the result or error
-                        }
-                    });
-            listDataHeader = new ArrayList<String>();
-            listDataChild = new HashMap<String, List<String>>();
-
-            // Adding child data
-            listDataHeader.add("Category");
-            listDataHeader.add("Account");
-            listDataHeader.add("Settings");
-            listDataHeader.add("Rate App");
-            listDataHeader.add("Share App");
-            listDataHeader.add("Help Centre");
-
-            // Adding child data
-            List<String> top250 = new ArrayList<String>();
-            top250.add("Woman's Clothings");
-            top250.add("Man's Clothings");
-            top250.add("Electronics");
-            top250.add("Home and Garden");
-            top250.add("Jwellery and Health");
-            top250.add("Automotive");
-            top250.add("Beauty and Health");
-            top250.add("Toys, Kids and Baby");
-            top250.add("Bags and Shoes");
-            top250.add("Sports and Outdoor");
-            top250.add("Phone and Accessories");
-            top250.add("Computer and Networking");
-            top250.add("VIEW ALL CATEGORIES");
-
-            List<String> Settings_data = new ArrayList<String>();
-            Settings_data.add("Subscription");
-            Settings_data.add("Change Password");
-
-            List<String> account = new ArrayList<String>();
-            List<String> ratethisapp = new ArrayList<String>();
-            List<String> help_center = new ArrayList<String>();
-            List<String> share_app = new ArrayList<String>();
-
-            listDataChild.put(listDataHeader.get(0), categoryname); // Header, Child data
-            listDataChild.put(listDataHeader.get(1), account); // Header, Child data
-            listDataChild.put(listDataHeader.get(2), Settings_data);
-            listDataChild.put(listDataHeader.get(3), ratethisapp); // Header, Child data
-            listDataChild.put(listDataHeader.get(4), help_center); // Header, Child data
-            listDataChild.put(listDataHeader.get(5), share_app);
-        }
-        else {
-            Showmessage("Their is no Internet Connection");
-        }
-
-    }
+//        }
+//        else {
+//            Showmessage("Their is no Internet Connection");
+//        }
+//
+//    }
 
     private void Showmessage(String message) {
 
