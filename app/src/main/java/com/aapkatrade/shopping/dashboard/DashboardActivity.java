@@ -163,6 +163,7 @@ public class DashboardActivity extends AppCompatActivity {
         bottomNavigation.setSelectedBackgroundVisible(true);
         bottomNavigation.setAccentColor(ContextCompat.getColor(context, R.color.white));
         bottomNavigation.setInactiveColor(Color.parseColor("#000000"));
+
         bottomNavigation.setForceTint(true);
         bottomNavigation.setTranslucentNavigationEnabled(true);
         bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
