@@ -184,9 +184,6 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
 
 
-
-
-
         }
         else
         {
