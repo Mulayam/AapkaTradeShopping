@@ -65,7 +65,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     private static final int IMAGE_PICKER_SELECT = 999;
     boolean mFromSavedInstance;
     View view;
-    String Fname, Lname, Dob;
+    String Fname,Lname,Dob;
 
     public static final String PREFS_NAME = "call_recorder";
     private SharedPreferences loginPreferences;
@@ -77,13 +77,13 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     private Context context;
     TextView footer;
     RelativeLayout header;
-    public static CircleImageView circleImageViewProfilePic;
-    TextView textViewName, textViewmobile_no, textView_email;
+    public static  CircleImageView circleImageViewProfilePic;
+    TextView textViewName,textViewmobile_no,textView_email;
     private ImageView imageViewGB;
     private ExpandableListView expListView;
     private ImageView edit_profile_imgview;
     private ExpandableListAdapter listAdapter;
-    private ArrayList<String> listDataHeader;
+    private ArrayList<String> listDataHeader = null;
     private HashMap<String, List<String>> listDataChild;
     ProgressDialog _progressDialog;
 
@@ -97,39 +97,42 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_navigation, container, false);
-        _progressDialog = new ProgressDialog(context);
+        _progressDialog=new ProgressDialog(context);
         initView();
         return view;
     }
 
     private void initView() {
         //prepare textviewdata
-        categoryname = new ArrayList<>();
-        categoryids = new ArrayList<>();
-        textViewName = (TextView) view.findViewById(R.id.tv_username);
-        textViewmobile_no = (TextView) view.findViewById(R.id.tv_mobno);
-        textView_email = (TextView) view.findViewById(R.id.tv_email_profile);
+        categoryname=new ArrayList<>();
+        categoryids=new ArrayList<>();
+        textViewName=(TextView)view.findViewById(R.id.tv_username);
+        textViewmobile_no=(TextView)view.findViewById(R.id.tv_mobno);
+        textView_email=(TextView)view.findViewById(R.id.tv_email_profile);
 
         //sharedprefrance
         loginPreferences = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         loginPrefsEditor = loginPreferences.edit();
 
         expListView = (ExpandableListView) view.findViewById(R.id.lvExp);
-        edit_profile_imgview = (ImageView) view.findViewById(R.id.img_edit_profile);
+        edit_profile_imgview=(ImageView)view.findViewById(R.id.img_edit_profile);
         edit_profile_imgview.setOnClickListener(this);
 //circle imageview
 
-        circleImageViewProfilePic = (CircleImageView) view.findViewById(R.id.imageViewDP);
+        circleImageViewProfilePic=(CircleImageView)view.findViewById(R.id.imageViewDP);
         circleImageViewProfilePic.setOnClickListener(this);
-        //ImagePicker.setMinQuality(600, 600);
+       //ImagePicker.setMinQuality(600, 600);
+
+
 
 
         // preparing list data
-        if (Connetivity_check.isNetworkAvailable(getActivity()) == true) { /*prepareListData();*/
+        if(Connetivity_check.isNetworkAvailable(getActivity())==true)
+        { /*prepareListData();*/
 
 
-            listDataHeader = new ArrayList<String>();
-            listDataChild = new HashMap<String, List<String>>();
+            listDataHeader = new ArrayList<>();
+            listDataChild = new HashMap<>();
 
             // Adding child data
             listDataHeader.add("Category");
@@ -171,7 +174,19 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
             listDataChild.put(listDataHeader.get(4), help_center); // Header, Child data
             listDataChild.put(listDataHeader.get(5), share_app);
 
-        } else {
+
+
+
+
+
+
+
+
+
+
+        }
+        else
+        {
             Showmessage("Their is no internet connection");
         }
 
@@ -185,22 +200,31 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     public void itemClicked(View view, int groupview, int childview) {
         try {
             //showMessage("groupbiew: " + groupview + "\nchildview: " + childview);
-            if ((groupview == 1) & (childview == 0)) {
-                Intent i = new Intent(getActivity(), User_account.class);
+            if((groupview==1)&(childview==0))
+            {
+                Intent i=new Intent(getActivity(), User_account.class);
 //                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
 
-            } else if (groupview == 0) {
-                Intent i = new Intent(getActivity(), Productlist_category_activity.class);
+            }
+            else if(groupview==0)
+            {
+                Intent i=new Intent(getActivity(), Productlist_category_activity.class);
                 startActivity(i);
-            } else if (groupview == 2 & childview == 1) {
-                Intent i = new Intent(getActivity(), change_password.class);
+            }
+            else if(groupview==2 &childview==1)
+            {
+                Intent i=new Intent(getActivity(),change_password.class);
                 startActivity(i);
-            } else if (groupview == 2 & childview == 0) {
-                // callSubscribedwebservice();
-            } else if (groupview == 5) {
-                Intent i = new Intent(getActivity(), Help_center.class);
+            }
+            else if(groupview==2 &childview==0)
+            {
+              // callSubscribedwebservice();
+            }
+            else if(groupview==5)
+            {
+                Intent i=new Intent(getActivity(),Help_center.class);
                 startActivity(i);
             }
 
@@ -216,77 +240,80 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     }
 
 
-    private void prepareListData() {
-
-        if (Connetivity_check.isNetworkAvailable(getActivity()) == true)
-
-        {
-            String url = "https://netforcesales.com/eclipseexpress/web_api.php?type=category";
-            _progressDialog.show();
-
-            setupSelfSSLCert();
-            Ion.with(this)
-                    .load(url)
-                    .progressDialog(_progressDialog)
-                    .asJsonObject()
-
-                    .setCallback(new FutureCallback<JsonObject>() {
-                        @Override
-                        public void onCompleted(Exception e, JsonObject result) {
-                            if (result != null)
-
-                            {
 
 
-                                String status = result.get("status").toString();
-                                if (status.contains("success")) {
-                                    JsonObject categories = result.getAsJsonObject("result");
-
-
-                                    JsonArray personen = categories.getAsJsonArray("categories");
-                                    for (int i = 0; i < personen.size(); i++) {
-                                        JsonObject user = personen.get(i).getAsJsonObject();
-                                        String category_name = user.get("name").getAsString();
-                                        String category_id = user.get("category_id").getAsString();
-                                        categoryids.add(category_id);
-                                        categoryname.add(category_name);
-
-                                    }
-
-                                    Log.e("categoryids", categoryids.toString());
-                                    Log.e("categoryname", categoryname.toString());
-
-
-                                }
-
-                                _progressDialog.dismiss();
-
-                            } else {
-                                Log.e("error", e.toString());
-                            }
-
-//                                        JsonObject js =result;
+//    private void prepareListData() {
 //
-//                                        String status=result.get("status").toString();
-//                                        String customer_id=result.get("customer_id").toString();
-//                                        String message=result.get("message").toString();
-//                                        Log.e("status","st"+status+"cust"+customer_id+"mes"+message);
+//        if (Connetivity_check.isNetworkAvailable(getActivity()) == true)
+//
+//        {
+//            String url = "https://netforcesales.com/eclipseexpress/web_api.php?type=category";
+//            _progressDialog.show();
+//
+//            setupSelfSSLCert();
+//            Ion.with(this)
+//                    .load(url)
+//                    .progressDialog(_progressDialog)
+//                    .asJsonObject()
+//
+//                    .setCallback(new FutureCallback<JsonObject>() {
+//                        @Override
+//                        public void onCompleted(Exception e, JsonObject result) {
+//                            if (result != null)
+//
+//                            {
+//
+//
+//                                String status = result.get("status").toString();
+//                                if (status.contains("success")) {
+//                                    JsonObject categories = result.getAsJsonObject("result");
+//
+//
+//                                    JsonArray personen = categories.getAsJsonArray("categories");
+//                                    for (int i = 0; i < personen.size(); i++) {
+//                                        JsonObject user = personen.get(i).getAsJsonObject();
+//                                        String category_name = user.get("name").getAsString();
+//                                        String category_id = user.get("category_id").getAsString();
+//                                        categoryids.add(category_id);
+//                                        categoryname.add(category_name);
+//
+//                                    }
+//
+//                                    Log.e("categoryids", categoryids.toString());
+//                                    Log.e("categoryname", categoryname.toString());
+//
+//
+//                                }
+//
+//                                _progressDialog.dismiss();
+//
+//                            } else {
+//                                Log.e("error", e.toString());
+//                            }
+//
+////                                        JsonObject js =result;
+////
+////                                        String status=result.get("status").toString();
+////                                        String customer_id=result.get("customer_id").toString();
+////                                        String message=result.get("message").toString();
+////                                        Log.e("status","st"+status+"cust"+customer_id+"mes"+message);
+//
+//
+//                            // do stuff with the result or error
+//                        }
+//                    });
 
-
-                            // do stuff with the result or error
-                        }
-                    });
-
-        } else {
-            Showmessage("Their is no Internet Connection");
-        }
-
-    }
+//        }
+//        else {
+//            Showmessage("Their is no Internet Connection");
+//        }
+//
+//    }
 
     private void Showmessage(String message) {
 
 
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -372,13 +399,14 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_edit_profile:
-                Intent i = new Intent(getActivity(), Edit_profile_activity.class);
-                if (Fname != null) {
+                Intent i=new Intent(getActivity(), Edit_profile_activity.class);
+                if(Fname!=null) {
                     i.putExtra("fname", Fname);
                     i.putExtra("lname", Lname);
                     i.putExtra("dob", Dob);
 
-                } else {
+                }
+                else{
 
 
                 }
@@ -400,14 +428,15 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
         transaction.commit();
     }
 
-    public void setdata(String username, String mobno, String email, String Lastname, String dob) {
-        Fname = username;
-        Lname = Lastname;
-        Dob = dob;
+    public void setdata(String username, String mobno, String email,String Lastname,String dob) {
+        Fname=username;
+        Lname=Lastname;
+        Dob=dob;
 
         textViewName.setText(username);
         textViewmobile_no.setText(mobno);
         textView_email.setText(email);
+
 
 
     }
@@ -443,7 +472,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
     }
 
-    public void setupSelfSSLCert() {
+    public  void setupSelfSSLCert() {
         final Trust trust = new Trust();
         final TrustManager[] trustmanagers = new TrustManager[]{trust};
         SSLContext sslContext;
@@ -458,6 +487,14 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
             e.printStackTrace();
         }
     }
+
+
+
+
+
+
+
+
 
 
 }
