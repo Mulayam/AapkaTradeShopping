@@ -41,6 +41,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <android.support.design.widget.CoordinatorLayout
+                android:id="@+id/coordination_home_activity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+
             <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/drawer_layout1"
@@ -51,7 +58,17 @@
 
             </FrameLayout>
 
-            <FrameLayout
+            <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sixty_dip"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                app:selectedBackgroundVisible="false"
+
+                />
+
+           <!-- <FrameLayout
                 android:id="@+id/fragmentAd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,17 +78,18 @@
                 android:layout_gravity="center_horizontal|bottom">
 
 
-                <!---add your views here-->
+                &lt;!&ndash;-add your views here&ndash;&gt;
 
-                <!-- <ImageView
+                &lt;!&ndash; <ImageView
                      android:id="@+id/imageView_close"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:layout_gravity="top|right"
                      android:clickable="true"
-                     android:src="@drawable/close" />-->
-            </FrameLayout>
+                     android:src="@drawable/close" />&ndash;&gt;
+            </FrameLayout>-->
 
+            </android.support.design.widget.CoordinatorLayout>
         </RelativeLayout>
 
     </LinearLayout>
