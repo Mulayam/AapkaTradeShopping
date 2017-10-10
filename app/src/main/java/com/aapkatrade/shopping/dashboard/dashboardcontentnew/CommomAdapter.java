@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+
 import com.aapkatrade.shopping.R;
 import com.aapkatrade.shopping.productdetail.ProductDetailActivity;
 
@@ -25,24 +27,16 @@ public class CommomAdapter extends RecyclerView.Adapter<CommomHolder> {
     }
 
     @Override
-    public CommomHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CommomHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_dashboard, parent, false);
         CommomHolder viewHolder = new CommomHolder(view);
-
 
         //RecyclerView.ViewHolder viewHolder;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-
-
-
                 View v = inflater.inflate(R.layout.row_dashboard, parent, false);
                 viewHolder = new CommomHolder(v);
-
-
-
-
-
 
         return viewHolder;
     }

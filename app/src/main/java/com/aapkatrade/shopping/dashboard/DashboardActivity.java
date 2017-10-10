@@ -2,30 +2,24 @@ package com.aapkatrade.shopping.dashboard;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.aapkatrade.shopping.Account.Mywishlist.MyWishlist_activity;
-import com.aapkatrade.shopping.dashboard.dashboardcontent.DashboardFragment;
+import com.aapkatrade.shopping.R;
+
+import com.aapkatrade.shopping.dashboard.dashboardcontentnew.DashboardFragment;
 import com.aapkatrade.shopping.dashboard.navigation.NavigationFragment;
 import com.mikepenz.actionitembadge.library.ActionItemBadge;
-import com.aapkatrade.shopping.R;
 
 
 public class DashboardActivity extends AppCompatActivity {
@@ -33,7 +27,7 @@ public class DashboardActivity extends AppCompatActivity {
     private NavigationFragment drawer;
     private Toolbar toolbar;
     private DashboardFragment homeFragment;
-   public static String username,mobno,email,Lastname,dob;
+    public static String username,mobno,email,Lastname,dob;
 
 
     Context context;
@@ -56,8 +50,8 @@ public class DashboardActivity extends AppCompatActivity {
         if(b!=null)
         {
             username =(String) b.get("username");
-             mobno =(String) b.get("mobno");
-             email =(String) b.get("email");
+            mobno =(String) b.get("mobno");
+            email =(String) b.get("email");
             Lastname=(String) b.get("lname");
             dob=(String) b.get("dob");
 

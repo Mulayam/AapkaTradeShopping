@@ -78,7 +78,8 @@
             android:label="@string/title_activity_myorder_details"
             android:theme="@style/AppTheme" />
         <activity android:name=".ProductCategory.Top_selling.top_selling_viewall.Topselling_viewall" />
-        <activity android:name=".ProductCategory.sub_category_brands_offers.sub_category_viewall_offer.Viewall_offer_all"></activity>
+        <activity android:name=".ProductCategory.sub_category_brands_offers.sub_category_viewall_offer.Viewall_offer_all" />
+        <activity android:name=".login.NewLoginActivity"></activity>
     </application>
 
 </manifest>

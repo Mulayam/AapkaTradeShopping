@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.aapkatrade.shopping.R;
 import com.aapkatrade.shopping.productdetail.ProductDetailActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,8 @@ public class Adapter extends RecyclerView.Adapter<Holder> {
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
+    public void onBindViewHolder(Holder holder, int position)
+    {
         holder.linearlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +42,21 @@ public class Adapter extends RecyclerView.Adapter<Holder> {
                 context.startActivity(intent);
             }
         });
+
+        Picasso.with(context).load(datas.get(position).imageurl)
+                .placeholder(R.drawable.david)
+                .error(R.drawable.david)
+                .into(holder.imgProduct);
+
+       holder.txtProductName.setText(datas.get(position).name);
+
+        holder.txtPrice.setText(context.getResources().getText(R.string.rupay_text)+datas.get(position).price);
+
+        holder.txtShortdescription.setText(datas.get(position).short_description);
+
+        holder.txtSpecialPrice.setText(context.getResources().getText(R.string.rupay_text)+datas.get(position).special_price);
+
+
     }
 
     @Override

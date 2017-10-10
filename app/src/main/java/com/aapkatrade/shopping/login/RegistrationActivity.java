@@ -1,6 +1,8 @@
 package com.aapkatrade.shopping.login;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -11,9 +13,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aapkatrade.shopping.AndroidUtils;
+import com.aapkatrade.shopping.MainActivity;
+import com.aapkatrade.shopping.dashboard.DashboardActivity;
 import com.aapkatrade.shopping.general.Connetivity_check;
+import com.aapkatrade.shopping.general.progressbar.ProgressBarHandler;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -31,45 +39,77 @@ import javax.net.ssl.SSLEngine;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener{
-    Button registration;
-    EditText Fname,Lname,EmailId,password,confirm_password,Mobile_no;
+public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener
+{
+    RelativeLayout registration;
+    EditText Fname,Lname,EmailId,password,confirm_password;
     private Pattern pattern;
     private Matcher matcher;
+    TextView txtSign;
     SSLEngine engine;
+    private ProgressBarHandler progressBarHandler;
     ProgressDialog _progressDialog;
     private static final String PASSWORD_PATTERN =
             "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(R.layout.activity_new_registration);
+
+        progressBarHandler = new ProgressBarHandler(RegistrationActivity.this);
+
+
+       /*
         Window window = getWindow();
 
 
-// clear FLAG_TRANSLUCENT_STATUS flag:
+       // clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+         // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // only for gingerbread and newer versions
             window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.grey));
-        }
+        }*/
+
+
+
         initview();
     }
 
-    private void initview() {
+    private void initview()
+    {
+
         _progressDialog = new ProgressDialog(this);
-        registration=(Button)findViewById(R.id.buttonGetstarted);
+        registration=(RelativeLayout) findViewById(R.id.buttonGetstarted);
         Fname=(EditText)findViewById(R.id.etfirstname);
         Lname=(EditText)findViewById(R.id.et_lastname);
         EmailId=(EditText)findViewById(R.id.etEmail);
         password=(EditText)findViewById(R.id.etpassword);
         confirm_password=(EditText)findViewById(R.id.etconfirmpassword);
-        Mobile_no=(EditText)findViewById(R.id.etmob);
+
+        txtSign = (TextView) findViewById(R.id.txtSign);
+
+        txtSign.setPaintFlags(txtSign.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
+
+       // Mobile_no=(EditText)findViewById(R.id.etmob);
         registration.setOnClickListener(this);
 
+        txtSign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+
+                Intent intent=new Intent(RegistrationActivity.this, NewLoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                overridePendingTransition(R.anim.enter, R.anim.exit);
+
+            }
+        });
 
     }
 
@@ -95,83 +135,96 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void Applyvalidation() {
+    private void Applyvalidation()
+    {
         if(Connetivity_check.isNetworkAvailable(this)==true)
 
         {
-            if (Fname.getText().length() != 0 || password.getText().length() != 0 || confirm_password.getText().length() != 0 || EmailId.getText().length() != 0 || Mobile_no.getText().length() != 0 || Lname.getText().length() != 0) {
+            if (Fname.getText().length() != 0 || password.getText().length() != 0 || confirm_password.getText().length() != 0 || EmailId.getText().length() != 0  || Lname.getText().length() != 0)
+            {
                 String email = EmailId.getText().toString();
-                if (isValidEmail(email)) {
-                    if (password.getText().toString().equals(confirm_password.getText().toString())) {
-                        if (Mobile_no.getText().length() < 10) {
-
-                            Showmessage("Enter 10 digit mobile no");
-                        } else {
-
-                            _progressDialog.show();
-
-                            String url = "https://netforcesales.com/eclipseexpress/web_api.php?type=registration&email=" + EmailId.getText().toString() + "&firstname=" + Fname.getText().toString() + "" + "&lastname=" + Lname.getText().toString() + "" +
-                                    "&password=" + password.getText().toString() + "&mobile_no=" + Mobile_no.getText().toString() + "&website_id=1&store_id=1&group_id=1";
+                if (isValidEmail(email))
+                {
+                    if (password.getText().toString().equals(confirm_password.getText().toString()))
+                    {
 
 
-                            Log.e("url", url);
-                            setupSelfSSLCert();
-                            Ion.with(this)
-                                    .load(url)
-                                    .progressDialog(_progressDialog)
-                                    .asJsonObject()
+                        //callWebServiceForBuyerRegistration();
 
-                                    .setCallback(new FutureCallback<JsonObject>() {
-                                        @Override
-                                        public void onCompleted(Exception e, JsonObject result) {
-                                            if (result != null)
-
-                                            {
+                    }
+                    else
+                     {
 
 
-                                                String status = result.get("status").toString();
-                                                // String customer_id = result.get("customer_id").toString();
-                                                String message = result.get("message").toString();
-
-                                                Log.e("status", "st" + status + "mes" + message);
-                                                Showmessage(message);
-                                                _progressDialog.dismiss();
-
-                                            } else {
-                                                Log.e("error", e.toString());
-                                            }
-
-//                                        JsonObject js =result;
-//
-//                                        String status=result.get("status").toString();
-//                                        String customer_id=result.get("customer_id").toString();
-//                                        String message=result.get("message").toString();
-//                                        Log.e("status","st"+status+"cust"+customer_id+"mes"+message);
-
-
-                                            // do stuff with the result or error
-                                        }
-                                    });
-                        }
-                    } else {
-
-
-                        Showmessage("password don't match");
+                        //Showmessage("password don't match");
+                        AndroidUtils.showToast(RegistrationActivity.this,"password don't match");
                     }
 
 
-                } else {
-                    Showmessage("Invalid Email");
+                }
+                else
+                {
+                   // Showmessage("Invalid Email");
+                    AndroidUtils.showToast(RegistrationActivity.this,"Please Enter Valid Email");
                 }
 
             } else {
-                Showmessage("Can't Leave blank");
+                AndroidUtils.showToast(RegistrationActivity.this,"Can't Leave blank Field");
+               // Showmessage("Can't Leave blank");
             }
         }
         else{
-            Showmessage("Their is no Internet connectivity");
+           // Showmessage("Their is no Internet connectivity");
+            AndroidUtils.showToast(RegistrationActivity.this,"Please Connect Internet");
         }
     }
+
+   /* private void callWebServiceForBuyerRegistration()
+    {
+        progressBarHandler.show();
+
+        Ion.with(RegistrationActivity.this)
+                .load(getResources().getString(R.string.webservice_base_url) + "/buyerregister")
+                .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("type", "registration")
+                .setBodyParameter("email", "android")
+                .setBodyParameter("firstname", AppConfig.getCurrentDeviceId(context))
+                .setBodyParameter("lastname", formBuyerData.getFirstName())
+                .setBodyParameter("password", formBuyerData.getLastName())
+                .setBodyParameter("website_id", formBuyerData.getCountryId())
+                .setBodyParameter("store_id", formBuyerData.getStateId())
+                .setBodyParameter("group_id", formBuyerData.getCityId())
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        if (result != null) {
+
+                            if (result.get("error").getAsString().equals("false")) {
+
+
+                                Log.e("registration_buyer", result.toString());
+
+                                progressBarHandler.hide();
+
+
+                            } else {
+                                progressBarHandler.hide();
+                                AndroidUtils.showSnackBar(registrationLayout, result.get("message").getAsString());
+                            }
+                        } else {
+
+                            Log.e("result_seller_error", e.toString());
+                            showMessage(e.toString());
+                        }
+                    }
+
+                });
+
+
+
+    }*/
 
     private void Showmessage(String message) {
 

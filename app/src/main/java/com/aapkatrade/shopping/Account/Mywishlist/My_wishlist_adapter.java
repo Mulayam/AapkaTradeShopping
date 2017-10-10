@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.aapkatrade.shopping.AndroidUtils;
 import com.aapkatrade.shopping.R;
 import com.aapkatrade.shopping.dashboard.dashboardcontentnew.CommomData;
 
@@ -34,14 +35,45 @@ public class My_wishlist_adapter extends RecyclerView.Adapter<CommonHolder_wishl
     @Override
     public void onBindViewHolder(CommonHolder_wishlist holder, int position)
     {
-        holder.cardview.setOnClickListener(new View.OnClickListener() {
+
+
+        /* holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(context, CategoryActivity.class);
-//                context.startActivity(intent);
-                ((AppCompatActivity)context).overridePendingTransition(R.anim.enter, R.anim.exit);
+          //                Intent intent = new Intent(context, CategoryActivity.class);
+         //                context.startActivity(intent);
+                //((AppCompatActivity)context).overridePendingTransition(R.anim.enter, R.anim.exit);
             }
         });
+      */
+
+
+       holder.imgDeleteProduct.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+
+           }
+       });
+
+
+       holder.relative_decreament_qty.setOnClickListener(new View.OnClickListener()
+       {
+           @Override
+           public void onClick(View view)
+           {
+               AndroidUtils.showToast(context,"Hi");
+
+           }
+       });
+
+
+       holder.relative_increament_qty.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+
+               AndroidUtils.showToast(context,"Hi");
+           }
+       });
 
 
     }

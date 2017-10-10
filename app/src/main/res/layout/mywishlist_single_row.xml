@@ -125,6 +125,7 @@
                         >
 
                         <RelativeLayout
+                            android:id="@+id/relative_decreament_qty"
                             android:layout_width="@dimen/twenty_five_dip"
                             android:layout_height="@dimen/twenty_five_dip"
                             android:background="@drawable/increament_quantity"
@@ -153,6 +154,7 @@
                             />
 
                         <RelativeLayout
+                            android:id="@+id/relative_increament_qty"
                             android:layout_width="@dimen/twenty_five_dip"
                             android:layout_height="@dimen/twenty_five_dip"
                             android:background="@drawable/increament_quantity"
@@ -191,6 +193,7 @@
 
 
                 <ImageView
+                    android:id="@+id/imgDeleteProduct"
                     android:layout_width="@dimen/twenty_five_dip"
                     android:layout_height="@dimen/twenty_five_dip"
                     android:src="@drawable/ic_close_red"
