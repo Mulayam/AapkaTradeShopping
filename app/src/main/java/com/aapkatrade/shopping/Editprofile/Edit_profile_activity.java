@@ -50,7 +50,7 @@ public class Edit_profile_activity extends AppCompatActivity implements View.OnC
 
     private DatePicker datePicker;
     private Calendar calendar;
-    CircleImageView circleImageViewProfilePic;
+   // CircleImageView circleImageViewProfilePic;
 
     private int year, month, day;
     ProgressDialog progressDialog;
@@ -90,8 +90,8 @@ public class Edit_profile_activity extends AppCompatActivity implements View.OnC
         input_fname=(EditText)findViewById(R.id.input_fname);
         input_lname=(EditText)findViewById(R.id.input_lname);
         input_dob=(EditText)findViewById(R.id.input_dob);
-        circleImageViewProfilePic=(CircleImageView)findViewById(R.id.imageView2);
-        circleImageViewProfilePic.setOnClickListener(this);
+      /*  circleImageViewProfilePic=(CircleImageView)findViewById(R.id.imageView2);
+        circleImageViewProfilePic.setOnClickListener(this);*/
         input_dob.setOnClickListener(this);
        Calendar cal = Calendar.getInstance();
         day = cal.get(Calendar.DAY_OF_MONTH);
@@ -171,13 +171,13 @@ public class Edit_profile_activity extends AppCompatActivity implements View.OnC
                 dpd.show(getFragmentManager(), "Datepickerdialog");
 
                 break;
-            case R.id.imageView2:
+       /*     case R.id.imageView2:
                 ImagePicker.pickImage(this, "Select your image:");
                 //Intent k = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 //startActivityForResult(k, IMAGE_PICKER_SELECT);
 //                Intent i=new Intent(getActivity(), Edit_profile_activity.class);
 //                startActivity(i);
-                break;
+                break;*/
         }
     }
 
@@ -241,7 +241,7 @@ public class Edit_profile_activity extends AppCompatActivity implements View.OnC
           String path=  getRealPathFromURI(tempUri);
           File  imageFile2 = new File(getRealPathFromURI(tempUri));
             Log.e("path2", path);
-            circleImageViewProfilePic.setImageBitmap(bitmap);
+            //circleImageViewProfilePic.setImageBitmap(bitmap);
 
             String Webservice_image = "https://netforcesales.com/eclipseexpress/web_api.php?type=customer_update";
             progressDialog.show();

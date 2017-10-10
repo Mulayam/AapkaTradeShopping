@@ -48,4 +48,12 @@
     <string name="sign_in_with">OR Sign In With</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="dont_have_account">Don\'t have an account? </string>
+
+    <string name="tab_1">Home</string>
+    <string name="tab_2">Wallet</string>
+    <string name="tab_3">Track Order</string>
+    <string name="tab_4">Account</string>
+    <string name="tab_5">Chat</string>
+
+
 </resources>
