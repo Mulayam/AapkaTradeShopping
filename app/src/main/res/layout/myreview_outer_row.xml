@@ -1,182 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearlayout"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
 
-    android:id="@+id/cardview_myreviews_outer"
-
-
-    android:layout_margin="10dp"
-    android:gravity="center">
-
-
-
-    <LinearLayout
-        android:orientation="vertical"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:weightSum="8"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/five_dip"
+        android:weightSum="100">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_weight="8"
-            android:weightSum="3"
-            android:layout_height="0dp">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="30"
+            android:gravity="center">
 
-            <RelativeLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/imgProduct"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/david" />
 
-                <ImageView
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="70"
+            android:orientation="vertical">
+
+
+
+
+                <TextView
+                    android:id="@+id/txtProductName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/demo_review_pic"
-                    android:scaleType="fitStart"
-                    android:id="@+id/imageView13" />
-            </RelativeLayout>
+                    android:layout_weight="80"
+                    android:maxLines="1"
+                    android:text="@string/lorem"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    />
+
+
+
+            <TextView
+                android:id="@+id/txtShortdescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem"
+                android:maxLines="2"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/twelve_dip" />
+
+
+            <io.techery.properratingbar.ProperRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/fifteen_dip"
+                app:prb_defaultRating="0"
+                app:prb_tickNormalDrawable="@drawable/ic_white_star"
+                app:prb_tickSelectedDrawable="@drawable/ic_orange_star"
+                app:prb_totalTicks="5"
+                android:layout_marginLeft="-5dp"
+                app:prb_clickable="false"
+                android:gravity="center_horizontal"
+                app:prb_tickSpacing="0dp"
+                />
+
 
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:weightSum="10"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
 
-
-                <io.techery.properratingbar.ProperRatingBar
-                    android:id="@+id/lowerRatingBar"
+                <TextView
+                    android:id="@+id/txtPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    app:prb_defaultRating="4"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="3dp"
+                    android:text="₹ 25000"
+                    android:textColor="@color/red"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                    app:prb_tickNormalDrawable="@mipmap/star_blank"
-                    app:prb_tickSelectedDrawable="@mipmap/star_icon_full"
-                    android:layout_toRightOf="@+id/profile_image"
-                    app:prb_totalTicks="5"
-                    app:prb_clickable="true"
-                    android:layout_below="@+id/month_txt"
-                    app:prb_tickSpacing="3dp"
 
+                <TextView
+                    android:id="@+id/txtSpecialPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="₹ 25000"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/fifteen_dip"
+                    android:layout_marginLeft="@dimen/five_dip"
                     />
 
                 <TextView
+                    android:id="@+id/txtSave"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Allen Solly"
-                    android:textSize="14sp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="3dp"
+                    android:text="30% Off"
                     android:textColor="@color/colorPrimary"
-                    android:id="@+id/textView14" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Red Tshirts with red trousers"
-                    android:textSize="8sp"
-                    android:layout_marginTop="10dp"
-
-
-                    android:id="@+id/textView31"
-                    android:layout_gravity="center_horizontal" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="RS 656 "
-                        android:textSize="8sp"
-
-                        android:textStyle="bold"
-
-                        android:id="@+id/textView32" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="RS 1099"
-                        android:textSize="8sp"
-                        android:layout_marginLeft="5dp"
-                        android:id="@+id/textView38" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="40% off"
-                    android:id="@+id/textView34"
-                    android:textSize="8sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_gravity="right" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent">
-
-                <RelativeLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_gravity="right"
-                    android:gravity="right"
-                    android:layout_marginRight="5dp"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="2 reviews"
-                        android:textSize="10sp"
-                        android:textColor="@color/colorPrimary"
-                        android:id="@+id/textView41"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true" />
-                </RelativeLayout>
+                    android:textSize="@dimen/fifteen_dip"
+                    android:layout_marginLeft="@dimen/five_dip"
+                    />
 
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 reviews"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/two_dip"
+                android:layout_marginTop="@dimen/five_dip"
+                android:textColor="@color/colorPrimary"
+                />
+
+
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <android.support.v7.widget.RecyclerView
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:gravity="center">
 
-                android:id="@+id/recycler_my_review" />
+            <com.like.LikeButton
+                android:id="@+id/star_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                app:icon_size="15dp"
+                app:icon_type="heart" />
         </LinearLayout>
-
     </LinearLayout>
 
-    </android.support.v7.widget.CardView>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorDivider" />
+</LinearLayout>
