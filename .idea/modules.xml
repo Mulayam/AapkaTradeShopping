@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AapkaTradeShopping.iml" filepath="$PROJECT_DIR$/AapkaTradeShopping.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AapkaTradeShopping.iml" filepath="$PROJECT_DIR$/.idea/AapkaTradeShopping.iml" />
+      <module fileurl="file://D:\AapkaTradeShopping\AapkaTradeShopping.iml" filepath="D:\AapkaTradeShopping\AapkaTradeShopping.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\AapkaTradeShopping\app\app.iml" filepath="D:\AapkaTradeShopping\app\app.iml" />
     </modules>
   </component>
 </project>

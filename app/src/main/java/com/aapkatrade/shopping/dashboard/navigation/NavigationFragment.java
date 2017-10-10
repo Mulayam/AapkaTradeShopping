@@ -65,7 +65,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     private static final int IMAGE_PICKER_SELECT = 999;
     boolean mFromSavedInstance;
     View view;
-    String Fname,Lname,Dob;
+    String Fname, Lname, Dob;
 
     public static final String PREFS_NAME = "call_recorder";
     private SharedPreferences loginPreferences;
@@ -77,8 +77,8 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     private Context context;
     TextView footer;
     RelativeLayout header;
-    public static  CircleImageView circleImageViewProfilePic;
-    TextView textViewName,textViewmobile_no,textView_email;
+    public static CircleImageView circleImageViewProfilePic;
+    TextView textViewName, textViewmobile_no, textView_email;
     private ImageView imageViewGB;
     private ExpandableListView expListView;
     private ImageView edit_profile_imgview;
@@ -97,78 +97,110 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_navigation, container, false);
-        _progressDialog=new ProgressDialog(context);
+        _progressDialog = new ProgressDialog(context);
         initView();
         return view;
     }
 
     private void initView() {
         //prepare textviewdata
-        categoryname=new ArrayList<>();
-        categoryids=new ArrayList<>();
-        textViewName=(TextView)view.findViewById(R.id.tv_username);
-        textViewmobile_no=(TextView)view.findViewById(R.id.tv_mobno);
-        textView_email=(TextView)view.findViewById(R.id.tv_email_profile);
+        categoryname = new ArrayList<>();
+        categoryids = new ArrayList<>();
+        textViewName = (TextView) view.findViewById(R.id.tv_username);
+        textViewmobile_no = (TextView) view.findViewById(R.id.tv_mobno);
+        textView_email = (TextView) view.findViewById(R.id.tv_email_profile);
 
         //sharedprefrance
         loginPreferences = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         loginPrefsEditor = loginPreferences.edit();
 
         expListView = (ExpandableListView) view.findViewById(R.id.lvExp);
-        edit_profile_imgview=(ImageView)view.findViewById(R.id.img_edit_profile);
+        edit_profile_imgview = (ImageView) view.findViewById(R.id.img_edit_profile);
         edit_profile_imgview.setOnClickListener(this);
 //circle imageview
 
-        circleImageViewProfilePic=(CircleImageView)view.findViewById(R.id.imageViewDP);
+        circleImageViewProfilePic = (CircleImageView) view.findViewById(R.id.imageViewDP);
         circleImageViewProfilePic.setOnClickListener(this);
-       //ImagePicker.setMinQuality(600, 600);
-
-
+        //ImagePicker.setMinQuality(600, 600);
 
 
         // preparing list data
-        if(Connetivity_check.isNetworkAvailable(getActivity())==true)
-        { /*prepareListData();*/}
-        else
-        {
+        if (Connetivity_check.isNetworkAvailable(getActivity()) == true) { /*prepareListData();*/
+
+
+            listDataHeader = new ArrayList<String>();
+            listDataChild = new HashMap<String, List<String>>();
+
+            // Adding child data
+            listDataHeader.add("Category");
+            listDataHeader.add("Account");
+            listDataHeader.add("Settings");
+            listDataHeader.add("Rate App");
+            listDataHeader.add("Share App");
+            listDataHeader.add("Help Centre");
+
+            // Adding child data
+            List<String> top250 = new ArrayList<String>();
+            top250.add("Woman's Clothings");
+            top250.add("Man's Clothings");
+            top250.add("Electronics");
+            top250.add("Home and Garden");
+            top250.add("Jwellery and Health");
+            top250.add("Automotive");
+            top250.add("Beauty and Health");
+            top250.add("Toys, Kids and Baby");
+            top250.add("Bags and Shoes");
+            top250.add("Sports and Outdoor");
+            top250.add("Phone and Accessories");
+            top250.add("Computer and Networking");
+            top250.add("VIEW ALL CATEGORIES");
+
+            List<String> Settings_data = new ArrayList<String>();
+            Settings_data.add("Subscription");
+            Settings_data.add("Change Password");
+
+            List<String> account = new ArrayList<String>();
+            List<String> ratethisapp = new ArrayList<String>();
+            List<String> help_center = new ArrayList<String>();
+            List<String> share_app = new ArrayList<String>();
+
+            listDataChild.put(listDataHeader.get(0), categoryname); // Header, Child data
+            listDataChild.put(listDataHeader.get(1), account); // Header, Child data
+            listDataChild.put(listDataHeader.get(2), Settings_data);
+            listDataChild.put(listDataHeader.get(3), ratethisapp); // Header, Child data
+            listDataChild.put(listDataHeader.get(4), help_center); // Header, Child data
+            listDataChild.put(listDataHeader.get(5), share_app);
+
+        } else {
             Showmessage("Their is no internet connection");
         }
 
-       /* listAdapter = new ExpandableListAdapter(context, listDataHeader, listDataChild);
+        listAdapter = new ExpandableListAdapter(context, listDataHeader, listDataChild);
         // setting list adapter
         expListView.setAdapter(listAdapter);
-        listAdapter.setClickListner(this);*/
+        listAdapter.setClickListner(this);
     }
 
     @Override
     public void itemClicked(View view, int groupview, int childview) {
         try {
             //showMessage("groupbiew: " + groupview + "\nchildview: " + childview);
-            if((groupview==1)&(childview==0))
-            {
-                Intent i=new Intent(getActivity(), User_account.class);
+            if ((groupview == 1) & (childview == 0)) {
+                Intent i = new Intent(getActivity(), User_account.class);
 //                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
 
-            }
-            else if(groupview==0)
-            {
-                Intent i=new Intent(getActivity(), Productlist_category_activity.class);
+            } else if (groupview == 0) {
+                Intent i = new Intent(getActivity(), Productlist_category_activity.class);
                 startActivity(i);
-            }
-            else if(groupview==2 &childview==1)
-            {
-                Intent i=new Intent(getActivity(),change_password.class);
+            } else if (groupview == 2 & childview == 1) {
+                Intent i = new Intent(getActivity(), change_password.class);
                 startActivity(i);
-            }
-            else if(groupview==2 &childview==0)
-            {
-              // callSubscribedwebservice();
-            }
-            else if(groupview==5)
-            {
-                Intent i=new Intent(getActivity(),Help_center.class);
+            } else if (groupview == 2 & childview == 0) {
+                // callSubscribedwebservice();
+            } else if (groupview == 5) {
+                Intent i = new Intent(getActivity(), Help_center.class);
                 startActivity(i);
             }
 
@@ -182,8 +214,6 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
 
     }
-
-
 
 
     private void prepareListData() {
@@ -246,50 +276,8 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
                             // do stuff with the result or error
                         }
                     });
-            listDataHeader = new ArrayList<String>();
-            listDataChild = new HashMap<String, List<String>>();
 
-            // Adding child data
-            listDataHeader.add("Category");
-            listDataHeader.add("Account");
-            listDataHeader.add("Settings");
-            listDataHeader.add("Rate App");
-            listDataHeader.add("Share App");
-            listDataHeader.add("Help Centre");
-
-            // Adding child data
-            List<String> top250 = new ArrayList<String>();
-            top250.add("Woman's Clothings");
-            top250.add("Man's Clothings");
-            top250.add("Electronics");
-            top250.add("Home and Garden");
-            top250.add("Jwellery and Health");
-            top250.add("Automotive");
-            top250.add("Beauty and Health");
-            top250.add("Toys, Kids and Baby");
-            top250.add("Bags and Shoes");
-            top250.add("Sports and Outdoor");
-            top250.add("Phone and Accessories");
-            top250.add("Computer and Networking");
-            top250.add("VIEW ALL CATEGORIES");
-
-            List<String> Settings_data = new ArrayList<String>();
-            Settings_data.add("Subscription");
-            Settings_data.add("Change Password");
-
-            List<String> account = new ArrayList<String>();
-            List<String> ratethisapp = new ArrayList<String>();
-            List<String> help_center = new ArrayList<String>();
-            List<String> share_app = new ArrayList<String>();
-
-            listDataChild.put(listDataHeader.get(0), categoryname); // Header, Child data
-            listDataChild.put(listDataHeader.get(1), account); // Header, Child data
-            listDataChild.put(listDataHeader.get(2), Settings_data);
-            listDataChild.put(listDataHeader.get(3), ratethisapp); // Header, Child data
-            listDataChild.put(listDataHeader.get(4), help_center); // Header, Child data
-            listDataChild.put(listDataHeader.get(5), share_app);
-        }
-        else {
+        } else {
             Showmessage("Their is no Internet Connection");
         }
 
@@ -298,7 +286,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     private void Showmessage(String message) {
 
 
-        Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -384,14 +372,13 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_edit_profile:
-                Intent i=new Intent(getActivity(), Edit_profile_activity.class);
-                if(Fname!=null) {
+                Intent i = new Intent(getActivity(), Edit_profile_activity.class);
+                if (Fname != null) {
                     i.putExtra("fname", Fname);
                     i.putExtra("lname", Lname);
                     i.putExtra("dob", Dob);
 
-                }
-                else{
+                } else {
 
 
                 }
@@ -413,15 +400,14 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
         transaction.commit();
     }
 
-    public void setdata(String username, String mobno, String email,String Lastname,String dob) {
-        Fname=username;
-        Lname=Lastname;
-        Dob=dob;
+    public void setdata(String username, String mobno, String email, String Lastname, String dob) {
+        Fname = username;
+        Lname = Lastname;
+        Dob = dob;
 
         textViewName.setText(username);
         textViewmobile_no.setText(mobno);
         textView_email.setText(email);
-
 
 
     }
@@ -457,7 +443,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
     }
 
-    public  void setupSelfSSLCert() {
+    public void setupSelfSSLCert() {
         final Trust trust = new Trust();
         final TrustManager[] trustmanagers = new TrustManager[]{trust};
         SSLContext sslContext;
@@ -472,14 +458,6 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-
-
 
 
 }
