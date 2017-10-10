@@ -7,7 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -46,48 +49,65 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <android.support.v4.widget.NestedScrollView
+                    android:id="@+id/scrollView"
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:clickable="true"
+                    android:fillViewport="true"
+
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/drawer_layout1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <include layout="@layout/content_main" />
+
+                        </FrameLayout>
 
 
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/drawer_layout1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
-                <include layout="@layout/content_main" />
-
-            </FrameLayout>
-
-            <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
-                android:id="@+id/bottom_navigation"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/sixty_dip"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="bottom"
-                app:selectedBackgroundVisible="false"
-
-                />
-
-           <!-- <FrameLayout
-                android:id="@+id/fragmentAd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center_horizontal|bottom">
+                    </RelativeLayout>
+                </android.support.v4.widget.NestedScrollView>
+                <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+                    android:id="@+id/bottom_navigation"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sixty_dip"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="bottom"
+                    app:selectedBackgroundVisible="false"
 
 
-                &lt;!&ndash;-add your views here&ndash;&gt;
-
-                &lt;!&ndash; <ImageView
-                     android:id="@+id/imageView_close"
+                    />
+                <!-- <FrameLayout
+                     android:id="@+id/fragmentAd"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:layout_gravity="top|right"
-                     android:clickable="true"
-                     android:src="@drawable/close" />&ndash;&gt;
-            </FrameLayout>-->
+                     android:layout_alignParentBottom="true"
+                     android:layout_centerHorizontal="true"
+                     android:layout_centerInParent="true"
+                     android:layout_gravity="center_horizontal|bottom">
+
+
+                     &lt;!&ndash;-add your views here&ndash;&gt;
+
+                     &lt;!&ndash; <ImageView
+                          android:id="@+id/imageView_close"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="top|right"
+                          android:clickable="true"
+                          android:src="@drawable/close" />&ndash;&gt;
+                 </FrameLayout>-->
 
             </android.support.design.widget.CoordinatorLayout>
         </RelativeLayout>
