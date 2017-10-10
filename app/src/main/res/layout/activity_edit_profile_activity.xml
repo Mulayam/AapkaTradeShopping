@@ -42,19 +42,19 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_weight="2.5"
+                android:layout_weight="1.5"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_height="0dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+               <!-- <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/david"
                     app:civ_border_color="@color/white"
                     app:civ_border_width="1dp"
                     android:id="@+id/imageView2"
-                    android:layout_gravity="center_horizontal|center_vertical" />
+                    android:layout_gravity="center_horizontal|center_vertical" />-->
             </LinearLayout>
 
             <LinearLayout
@@ -128,7 +128,7 @@
                         android:textColorHint="#E8E8E8"
                         android:singleLine="true"
                         style="@style/StyledTilEditText"
-                        android:hint="Date Of Birth" />
+                        android:hint="Email Address" />
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -145,19 +145,15 @@
                 android:layout_height="0dp">
 
 
-
-
-
-
-
                         <Button
                             style="?android:attr/buttonStyleSmall"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Submit"
                             android:textColor="#FFF"
                             android:paddingRight="50dp"
                            android:paddingLeft="50dp"
+                            android:layout_margin="@dimen/ten_dip"
                             android:background="#32b181"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
