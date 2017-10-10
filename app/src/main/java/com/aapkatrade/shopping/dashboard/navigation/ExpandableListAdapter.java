@@ -14,12 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.aapkatrade.shopping.R;
 import com.aapkatrade.shopping.general.Connetivity_check;
 import com.aapkatrade.shopping.login.LoginActivity;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
-import com.aapkatrade.shopping.R;
+
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;

@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">EclipseExpress</string>
+    <string name="app_name">Aapka Trade Shopping</string>
     <string name="facebook_app_id">621308328026023</string>
     <string name="welcome">Welcome to EclipseExpress</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="login">Log in</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="login">Signin</string>
     <string name="register_detail">Dont have an account? Register!!!</string>
     <string name="facebook">Facebook</string>
     <string name="twitter">twitter</string>
@@ -15,7 +16,7 @@
     <string name="getstarted">Get Started</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-
+    <string name="rupay_text">₹</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dashboardfragment">DashboardFragment</string>
@@ -38,6 +39,13 @@
     <string name="title_activity_viewall_subcategory">Viewall_subcategory</string>
     <string name="title_activity_view_all_flat_offers">View_all_flat_offers</string>
     <string name="title_activity_myorder_details">Myorder_details</string>
+    <string name="webservice_base_url">http://shopping.aapkatrade.com/webservice.php</string>
+    <string name="pleaseWait">Wait !</string>
+    <string name="webpage_being_loaded">Data is loading &#8230;&#8230;&#8230;</string>
+    <string name="sign_in">SIGN IN!</string>
+    <string name="email_or_mobile">Email</string>
 
-
+    <string name="sign_in_with">OR Sign In With</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="dont_have_account">Don\'t have an account? </string>
 </resources>

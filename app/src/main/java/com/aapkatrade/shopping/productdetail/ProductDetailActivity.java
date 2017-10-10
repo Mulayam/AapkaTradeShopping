@@ -29,9 +29,16 @@ import android.widget.Toast;
 
 
 import com.aapkatrade.shopping.Add_to_cart.Add_to_card_activity;
+import com.aapkatrade.shopping.AndroidUtils;
 import com.aapkatrade.shopping.checkout.CheckoutActivity1;
+import com.aapkatrade.shopping.general.AppSharedPreference;
+import com.aapkatrade.shopping.general.SharedPreferenceConstants;
+import com.aapkatrade.shopping.general.progressbar.ProgressBarHandler;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 import com.mikepenz.actionitembadge.library.ActionItemBadge;
 import com.aapkatrade.shopping.R;
 import com.shehabic.droppy.DroppyClickCallbackInterface;
@@ -58,11 +65,20 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     Context context;
     RadioGroup radioGroupColor, radioGroupSize;
     private Toolbar toolbar;
+    LinearLayout linearLayoutAdd_to_cart;
+    AppSharedPreference appSharedPreference;
+    ProgressBarHandler progressBarHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+
+        context = ProductDetailActivity.this;
+
+        appSharedPreference = new AppSharedPreference(context);
+        progressBarHandler = new ProgressBarHandler(context);
         context = this;
         setupToolBar("Product Detail");
         initview();
@@ -88,6 +104,17 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initview() {
+
+        linearLayoutAdd_to_cart = (LinearLayout) findViewById(R.id.linearLayoutAdd_to_cart);
+
+
+        linearLayoutAdd_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         radioGroupColor = (RadioGroup) findViewById(R.id.radioGroupColor);
         radioGroupSize = (RadioGroup) findViewById(R.id.radioGroupSize);
         linearLayoutQuantity = (LinearLayout) findViewById(R.id.linearlayoutQuantity);
@@ -327,5 +354,67 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     }
 
 
+    private void callwebservice__add_tocart(String product_id, String qty)
+    {
+        progressBarHandler.show();
+
+        String login_url = context.getResources().getString(R.string.webservice_base_url);
+
+        String user_id = appSharedPreference.getSharedPref(SharedPreferenceConstants.USER_ID.toString(), "notlogin");
+
+        if (user_id.equals("notlogin"))
+        {
+            user_id="";
+        }
+
+        Ion.with(context)
+                .load(login_url)
+                .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("type", "cart_add")
+                .setBodyParameter("pid", product_id)
+                .setBodyParameter("qty",qty)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>()
+                {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result)
+                    {
+
+                        if (result!=null)
+                        {
+                            System.out.println("result--------------" + result);
+                            String message = result.get("message").getAsString();
+                            JsonObject jsonObject = result.getAsJsonObject("result");
+
+                            if (message.equals("Product added to cart"))
+                            {
+                                AndroidUtils.showToast(context, "Product Successfully Added on Cart.");
+                                String cart_count = jsonObject.get("total_qty").getAsString();
+                                appSharedPreference.setSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), Integer.valueOf(cart_count));
+
+                                //int j = appSharedPreference.getSharedPrefInt("cart_count",0);
+                                //ShopAllProductActivity.tvCartCount.setText(String.valueOf(appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0)));
+                                progressBarHandler.hide();
+
+                            }
+                            else
+                            {
+
+                                progressBarHandler.hide();
+                                AndroidUtils.showToast(context, message);
+                            }
+
+                        }
+                        else
+                        {
+                            progressBarHandler.hide();
+                            AndroidUtils.showToast(context, "Server is not responding. Please try again.");
+                        }
+
+                    }
+                });
+
+    }
 
 }

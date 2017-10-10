@@ -19,7 +19,8 @@ public class MyWishlist_activity extends AppCompatActivity {
     Toolbar toolbar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_wishlist_activity);
         myorders_linearlayout_manager =  new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

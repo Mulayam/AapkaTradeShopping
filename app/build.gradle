@@ -43,6 +43,7 @@ repositories {
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
     //SUB-DEPENDENCIES
@@ -69,7 +70,7 @@ dependencies {
     compile 'me.relex:circleindicator:1.2.2@aar'
     compile 'com.shehabic.droppy:Droppy:0.5.1@aar'
     compile 'at.blogc:expandabletextview:1.0.3'
-   // compile 'com.afollestad.material-dialogs:core:0.8.6.0'
+    // compile 'com.afollestad.material-dialogs:core:0.8.6.0'
     compile 'com.github.jd-alexander:LikeButton:0.2.0'
     compile 'com.balysv:material-ripple:1.0.2'
     compile 'com.github.techery:properratingbar:0.0.5'

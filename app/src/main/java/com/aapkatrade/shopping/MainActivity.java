@@ -15,11 +15,16 @@ import android.util.Log;
 import com.aapkatrade.shopping.R;
 import com.aapkatrade.shopping.dashboard.DashboardActivity;
 import com.aapkatrade.shopping.login.LoginActivity;
+import com.aapkatrade.shopping.login.NewLoginActivity;
+import com.aapkatrade.shopping.login.RegistrationActivity;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import io.fabric.sdk.android.Fabric;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedpreferences;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
@@ -55,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
                 String user_id=sharedpreferences.getString("user_id",null);
-                if(user_id==null)
+                /*if(user_id==null)
                 {
 
                     SharedPreferences.Editor editor=sharedpreferences.edit();
@@ -79,7 +85,15 @@ public class MainActivity extends AppCompatActivity {
 
                     overridePendingTransition(R.anim.enter, R.anim.exit);
                     finish();
-                }
+                }*/
+
+               Intent intent=new Intent(MainActivity.this, NewLoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                overridePendingTransition(R.anim.enter, R.anim.exit);
+
+
 
             }
         }, 2000);

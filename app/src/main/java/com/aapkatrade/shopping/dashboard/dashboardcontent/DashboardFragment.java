@@ -111,7 +111,8 @@ public class DashboardFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    private class ParallaxStikkyAnimator extends HeaderStikkyAnimator {
+    private class ParallaxStikkyAnimator extends HeaderStikkyAnimator
+    {
         @Override
         public AnimatorBuilder getAnimatorBuilder() {
             View mHeader_image = getHeader().findViewById(R.id.relativeLayout);

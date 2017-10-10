@@ -30,4 +30,10 @@
     <color name="screen_background">#E7E7E7</color>
     <color name="transparent">#00000000</color>
     <color name="green_transparent">#0063BEAC</color>
+
+    <color name="toast_start_color">#16b696</color>
+    <color name="toast_end_color">#28deb9</color>
+    <color name="color_voilet">#FF6600</color>
+    <color name="login__background">#e7e7e7</color>
+    <color name="hint_color">#5d5d5d</color>
 </resources>
