@@ -32,8 +32,9 @@ public class My_review_adapter extends RecyclerView.Adapter<CommonHolder_myrevie
     }
 
     @Override
-    public void onBindViewHolder(CommonHolder_myreview_outer_row holder, int position) {
-        holder.cardview.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(CommonHolder_myreview_outer_row holder, int position)
+    {
+        holder.linearlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, Review_data.class);
