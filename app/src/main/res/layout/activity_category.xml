@@ -23,12 +23,15 @@
         android:layout_height="56dp"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:weightSum="100">
+        android:weightSum="100"
+        android:visibility="gone"
+        >
 
         <com.balysv.materialripple.MaterialRippleLayout
             android:layout_width="0dp"
             android:layout_height="56dp"
-            android:layout_weight="50">
+            android:layout_weight="50"
+            >
 
             <LinearLayout
                 android:id="@+id/linearlayoutSort"

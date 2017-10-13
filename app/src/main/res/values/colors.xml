@@ -36,4 +36,10 @@
     <color name="color_voilet">#FF6600</color>
     <color name="login__background">#e7e7e7</color>
     <color name="hint_color">#5d5d5d</color>
+
+
+    <color name="grey_light">#EEEEEE</color>
+    <color name="grey_light2">#D2CECD</color>
+
+
 </resources>

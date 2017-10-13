@@ -3,10 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-
     android:id="@+id/cardview_addtocard"
-
-
     android:layout_margin="10dp"
     android:gravity="center">
 
@@ -145,12 +142,13 @@ android:layout_gravity="center_vertical"
 
 
                 </LinearLayout>
-<LinearLayout
+
+  <LinearLayout
     android:layout_width="100dp"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="5dp"
     android:visibility="gone"
- android:weightSum="2"
+      android:weightSum="2"
     android:layout_gravity="center_vertical"
     android:gravity="center_vertical"
     android:background="@mipmap/box_dropdown"
@@ -166,8 +164,6 @@ android:layout_gravity="center_vertical"
                     android:id="@+id/textView34"
                     android:textSize="12sp"
 
-
-
                     />
 
     <Spinner
@@ -176,7 +172,7 @@ android:layout_gravity="center_vertical"
         android:id="@+id/spinner_addto_card"
 
         android:layout_weight="1" />
-</LinearLayout>
+       </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/dropdown_ll"

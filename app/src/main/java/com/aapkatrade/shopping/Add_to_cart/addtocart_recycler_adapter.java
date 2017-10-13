@@ -30,7 +30,8 @@ import java.util.List;
 /**
  * Created by abcd on 8/31/2016.
  */
-public class addtocart_recycler_adapter extends RecyclerView.Adapter<CommonHolder_addtocard> implements View.OnClickListener {
+public class addtocart_recycler_adapter extends RecyclerView.Adapter<CommonHolder_addtocard> implements View.OnClickListener
+{
     Context context;
     ArrayList<CommomData> commomDatas;
     String count_item[]={"1","2","3","4","5","6","7","8","9","More"};

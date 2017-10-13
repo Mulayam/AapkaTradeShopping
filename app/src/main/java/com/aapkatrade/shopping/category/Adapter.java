@@ -33,14 +33,20 @@ public class Adapter extends RecyclerView.Adapter<Holder> {
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position)
+    public void onBindViewHolder(Holder holder, final int position)
     {
-        holder.linearlayout.setOnClickListener(new View.OnClickListener() {
+        holder.linearlayout.setOnClickListener(new View.OnClickListener()
+        {
+
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Intent intent = new Intent(context, ProductDetailActivity.class);
+                intent.putExtra("product_id",datas.get(position).id);
                 context.startActivity(intent);
             }
+
+
         });
 
         Picasso.with(context).load(datas.get(position).imageurl)

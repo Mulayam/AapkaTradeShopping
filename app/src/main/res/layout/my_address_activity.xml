@@ -53,7 +53,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:text="Shipped Address"
-android:textColor="#Ed4812"
+                            android:textColor="#Ed4812"
                             android:id="@+id/textView39" />
                     </LinearLayout>
 

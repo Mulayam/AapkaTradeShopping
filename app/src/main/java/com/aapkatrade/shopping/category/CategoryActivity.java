@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 
 import com.aapkatrade.shopping.AndroidUtils;
+import com.aapkatrade.shopping.general.AppSharedPreference;
+import com.aapkatrade.shopping.general.SharedPreferenceConstants;
+import com.aapkatrade.shopping.general.progressbar.ProgressBarHandler;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -33,12 +36,22 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
     private RecyclerView recyclerView;
     ArrayList<Data> datas = new ArrayList<>();
     LinearLayout linearLayoutSortby, linearLayoutFilter;
+    AppSharedPreference appSharedPreference;
+    Menu new_menu;
+    ProgressBarHandler progressBarHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+
+
         context = this;
+
+        progressBarHandler = new ProgressBarHandler(context);
+
+        appSharedPreference = new AppSharedPreference(context);
+
         setupToolBar(getResources().getString(R.string.app_name));
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         initView();
@@ -55,17 +68,33 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+          new_menu = menu;
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.dashboard, menu);
-        ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
-                , ActionItemBadge.BadgeStyles.GREY, 3);
+
+        invalidateOptionsMenu();
+
+        if (appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0)==0)
+        {
+            ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
+                    , ActionItemBadge.BadgeStyles.GREY, 0);
+        }
+        else
+        {
+            ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
+                    , ActionItemBadge.BadgeStyles.GREY,  appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0));
+
+        }
+
+
         return true;
     }
 
 
     private void setupData(String pageNumber)
     {
-       // progressBarHandler.show();
+        progressBarHandler.show();
         Ion.with(CategoryActivity.this)
                 .load("http://shopping.aapkatrade.com/webservice.php")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
@@ -77,9 +106,10 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-                      //  progressBarHandler.hide();
+
                         if (result != null)
                         {
+                              progressBarHandler.hide();
                             AndroidUtils.showErrorLog(context, "-jsonObject------------" + result.toString());
                             JsonArray jsonProductList = result.getAsJsonArray("products");
                             if (jsonProductList != null && jsonProductList.size() > 0)
@@ -107,6 +137,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                                 recyclerView.setAdapter(adapter);
                             }
                         } else {
+                              progressBarHandler.hide();
                             AndroidUtils.showErrorLog(context, "-jsonObject------------NULL RESULT FOUND");
                         }
 
@@ -171,5 +202,23 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
 
     private void showMessage(String s) {
         Toast.makeText(CategoryActivity.this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+      /*  ActionItemBadge.update(((AppCompatActivity) context), new_menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
+                , ActionItemBadge.BadgeStyles.GREY,  appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0));
+*/
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+          ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
+                , ActionItemBadge.BadgeStyles.GREY,  appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0));
+
+        return super.onPrepareOptionsMenu(menu);
     }
 }
