@@ -12,10 +12,17 @@ import android.view.WindowManager;
 import com.aapkatrade.shopping.Add_to_cart.Add_to_card_activity;
 import com.aapkatrade.shopping.R;
 
+import com.aapkatrade.shopping.dashboard.navigation.Category_data;
+import com.aapkatrade.shopping.dashboard.navigation.NavigationFragment;
 
-public class DiscoverActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
-    private Toolbar toolbar;
+
+public class DiscoverActivity extends AppCompatActivity
+{
+
+      private Toolbar toolbar;
+     public static   ArrayList<Category_data> categoryData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,6 +32,8 @@ public class DiscoverActivity extends AppCompatActivity {
         setContentView(R.layout.activity_discover);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+        categoryData =  NavigationFragment.category_data;
 
         setupToolBar();
 
@@ -45,19 +54,11 @@ public class DiscoverActivity extends AppCompatActivity {
     private void setupTab()
     {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Woman"));
-        tabLayout.addTab(tabLayout.newTab().setText("Man"));
-        tabLayout.addTab(tabLayout.newTab().setText("Electronics"));
-        tabLayout.addTab(tabLayout.newTab().setText("Home"));
-        tabLayout.addTab(tabLayout.newTab().setText("Jwellery"));
-        tabLayout.addTab(tabLayout.newTab().setText("Automotive"));
-        tabLayout.addTab(tabLayout.newTab().setText("Beauty"));
-        tabLayout.addTab(tabLayout.newTab().setText("Toys"));
-        tabLayout.addTab(tabLayout.newTab().setText("Bags"));
-        tabLayout.addTab(tabLayout.newTab().setText("Sports"));
-        tabLayout.addTab(tabLayout.newTab().setText("Phone"));
-        tabLayout.addTab(tabLayout.newTab().setText("Computer"));
-        tabLayout.addTab(tabLayout.newTab().setText("ALL"));
+
+        for (int i=0; i<categoryData.size(); i++){
+
+            tabLayout.addTab(tabLayout.newTab().setText(categoryData.get(i).getName()));
+        }
 
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
