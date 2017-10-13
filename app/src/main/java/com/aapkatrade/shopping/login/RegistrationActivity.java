@@ -20,7 +20,9 @@ import android.widget.Toast;
 import com.aapkatrade.shopping.AndroidUtils;
 import com.aapkatrade.shopping.MainActivity;
 import com.aapkatrade.shopping.dashboard.DashboardActivity;
+import com.aapkatrade.shopping.general.AppSharedPreference;
 import com.aapkatrade.shopping.general.Connetivity_check;
+import com.aapkatrade.shopping.general.SharedPreferenceConstants;
 import com.aapkatrade.shopping.general.progressbar.ProgressBarHandler;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -46,6 +48,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     private Pattern pattern;
     private Matcher matcher;
     TextView txtSign;
+    public static AppSharedPreference appSharedPreference;
     SSLEngine engine;
     private ProgressBarHandler progressBarHandler;
     ProgressDialog _progressDialog;
@@ -59,7 +62,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         progressBarHandler = new ProgressBarHandler(RegistrationActivity.this);
 
-
+        appSharedPreference = new AppSharedPreference(RegistrationActivity.this);
        /*
         Window window = getWindow();
 
@@ -148,8 +151,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                     if (password.getText().toString().equals(confirm_password.getText().toString()))
                     {
 
-
-                        //callWebServiceForBuyerRegistration();
+                        callWebServiceForBuyerRegistration();
 
                     }
                     else
@@ -179,44 +181,57 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-   /* private void callWebServiceForBuyerRegistration()
+    private void callWebServiceForBuyerRegistration()
     {
         progressBarHandler.show();
 
         Ion.with(RegistrationActivity.this)
-                .load(getResources().getString(R.string.webservice_base_url) + "/buyerregister")
+                .load("http://shopping.aapkatrade.com/webservice.php")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "registration")
-                .setBodyParameter("email", "android")
-                .setBodyParameter("firstname", AppConfig.getCurrentDeviceId(context))
-                .setBodyParameter("lastname", formBuyerData.getFirstName())
-                .setBodyParameter("password", formBuyerData.getLastName())
-                .setBodyParameter("website_id", formBuyerData.getCountryId())
-                .setBodyParameter("store_id", formBuyerData.getStateId())
-                .setBodyParameter("group_id", formBuyerData.getCityId())
+                .setBodyParameter("email", EmailId.getText().toString())
+                .setBodyParameter("firstname", Fname.getText().toString())
+                .setBodyParameter("lastname", Lname.getText().toString())
+                .setBodyParameter("password", password.getText().toString())
+                .setBodyParameter("website_id","1")
+                .setBodyParameter("store_id", "1")
+                .setBodyParameter("group_id", "1")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
-                    public void onCompleted(Exception e, JsonObject result) {
-                        if (result != null) {
+                    public void onCompleted(Exception e, JsonObject result)
+                    {
+                        //Log.d("result_seller", result.toString());
+                       // System.out.println("result_seller---"+result.toString());
 
-                            if (result.get("error").getAsString().equals("false")) {
+                        if (result != null)
+                        {
 
-
-                                Log.e("registration_buyer", result.toString());
-
+                            if (result.get("status").getAsString().equals("success"))
+                            {
                                 progressBarHandler.hide();
-
-
-                            } else {
-                                progressBarHandler.hide();
-                                AndroidUtils.showSnackBar(registrationLayout, result.get("message").getAsString());
+                                appSharedPreference.setSharedPref(SharedPreferenceConstants.CUSTOMER_ID.toString(), "notlogin");
+                                //Toast.makeText(RegistrationActivity.this,result.get("message").getAsString(),Toast.LENGTH_SHORT).show();
+                                Intent intent=new Intent(RegistrationActivity.this, DashboardActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.enter, R.anim.exit);
                             }
-                        } else {
+                            else
+                            {
+                                progressBarHandler.hide();
+                                Toast.makeText(RegistrationActivity.this,result.get("message").getAsString(),Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else
+                        {
 
+                            progressBarHandler.hide();
                             Log.e("result_seller_error", e.toString());
-                            showMessage(e.toString());
+
+                            Toast.makeText(RegistrationActivity.this,e.toString(),Toast.LENGTH_SHORT).show();
+
                         }
                     }
 
@@ -224,7 +239,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
 
 
-    }*/
+    }
 
     private void Showmessage(String message) {
 

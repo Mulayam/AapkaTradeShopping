@@ -126,7 +126,8 @@
                 android:layout_gravity="right"
                 android:layout_marginRight="@dimen/two_dip"
                 android:layout_marginTop="@dimen/five_dip"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 />
 
 

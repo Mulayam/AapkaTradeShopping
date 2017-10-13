@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ import android.widget.Toast;
 import com.aapkatrade.shopping.Add_to_cart.Add_to_card_activity;
 import com.aapkatrade.shopping.AndroidUtils;
 import com.aapkatrade.shopping.checkout.CheckoutActivity1;
+import com.aapkatrade.shopping.dashboard.DashboardActivity;
 import com.aapkatrade.shopping.general.AppSharedPreference;
 import com.aapkatrade.shopping.general.SharedPreferenceConstants;
 import com.aapkatrade.shopping.general.progressbar.ProgressBarHandler;
@@ -50,8 +52,9 @@ import java.util.ArrayList;
 import at.blogc.android.views.ExpandableTextView;
 import me.relex.circleindicator.CircleIndicator;
 
-public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener {
-
+public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener
+{
+    Menu new_menu ;
     ViewPager viewPager;
     private ViewPagerAdapter adapter;
     ArrayList<String> arrayList = new ArrayList<>();
@@ -68,28 +71,59 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     LinearLayout linearLayoutAdd_to_cart;
     AppSharedPreference appSharedPreference;
     ProgressBarHandler progressBarHandler;
-
+    String product_id;
+    Button buutonAdd_toCart;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_product_detail);
 
         context = ProductDetailActivity.this;
 
         appSharedPreference = new AppSharedPreference(context);
+
         progressBarHandler = new ProgressBarHandler(context);
         context = this;
+
+        if (getIntent() != null)
+        {
+            product_id = getIntent().getStringExtra("product_id");
+        }
+
+
         setupToolBar("Product Detail");
+
         initview();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+        new_menu = menu;
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.dashboard, menu);
-        ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
-                , ActionItemBadge.BadgeStyles.GREY, 3);
+
+        invalidateOptionsMenu();
+
+        if (appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0)==0)
+        {
+            ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
+                    , ActionItemBadge.BadgeStyles.GREY, 0);
+
+        }
+        else
+        {
+            ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
+                    , ActionItemBadge.BadgeStyles.GREY,  appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0));
+
+
+        }
+
+
+
         return true;
     }
 
@@ -107,13 +141,52 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         linearLayoutAdd_to_cart = (LinearLayout) findViewById(R.id.linearLayoutAdd_to_cart);
 
+        buutonAdd_toCart = (Button) findViewById(R.id.buutonAdd_toCart);
 
-        linearLayoutAdd_to_cart.setOnClickListener(new View.OnClickListener() {
+        buutonAdd_toCart.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
+                Toast.makeText(context,"Hi Dear",Toast.LENGTH_SHORT).show();
+
+                System.out.println("data------"+appSharedPreference.getSharedPref(SharedPreferenceConstants.CART_ID.toString(), ""));
+
+                if (appSharedPreference.getSharedPref(SharedPreferenceConstants.CART_ID.toString(), "")=="")
+                {
+                    callwebservice__add_tocart(product_id,"1");
+                }
+                else {
+
+                    callwebservice__add_tocart_update(product_id,"1");
+                }
 
             }
+
         });
+
+
+       /* linearLayoutAdd_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+
+                  Toast.makeText(context,"Hi Dear",Toast.LENGTH_SHORT).show();
+
+
+                   System.out.println("data------"+appSharedPreference.getSharedPref(SharedPreferenceConstants.CART_ID.toString(), ""));
+
+                    if (appSharedPreference.getSharedPref(SharedPreferenceConstants.CART_ID.toString(), "")=="")
+                    {
+                        callwebservice__add_tocart(product_id,"1");
+                    }
+                   *//* else {
+                        callwebservice__add_tocart_update(product_id,"1");
+                    }*//*
+
+
+            }
+        });*/
 
         radioGroupColor = (RadioGroup) findViewById(R.id.radioGroupColor);
         radioGroupSize = (RadioGroup) findViewById(R.id.radioGroupSize);
@@ -331,7 +404,8 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle item selection
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -360,12 +434,6 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         String login_url = context.getResources().getString(R.string.webservice_base_url);
 
-        String user_id = appSharedPreference.getSharedPref(SharedPreferenceConstants.USER_ID.toString(), "notlogin");
-
-        if (user_id.equals("notlogin"))
-        {
-            user_id="";
-        }
 
         Ion.with(context)
                 .load(login_url)
@@ -389,9 +457,18 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
                             if (message.equals("Product added to cart"))
                             {
+
+                                String cart_count = jsonObject.get("total_cart_items").getAsString();
+                                String cart_id = jsonObject.get("cart_id").getAsString();
+
+                                System.out.println("cart_count-"+cart_count);
+
                                 AndroidUtils.showToast(context, "Product Successfully Added on Cart.");
-                                String cart_count = jsonObject.get("total_qty").getAsString();
+
+                                appSharedPreference.setSharedPref(SharedPreferenceConstants.CART_ID.toString(), cart_id);
                                 appSharedPreference.setSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), Integer.valueOf(cart_count));
+
+                                ActionItemBadge.update(((AppCompatActivity) context), new_menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black), ActionItemBadge.BadgeStyles.GREY, appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(),0));
 
                                 //int j = appSharedPreference.getSharedPrefInt("cart_count",0);
                                 //ShopAllProductActivity.tvCartCount.setText(String.valueOf(appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0)));
@@ -415,6 +492,83 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                     }
                 });
 
+    }
+
+
+    private void callwebservice__add_tocart_update(String product_id, String qty)
+    {
+        progressBarHandler.show();
+
+        String login_url = context.getResources().getString(R.string.webservice_base_url);
+
+
+        Ion.with(context)
+                .load(login_url)
+                .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("type", "cart_add")
+                .setBodyParameter("pid", product_id)
+                .setBodyParameter("qty",qty)
+                .setBodyParameter("cart_id",appSharedPreference.getSharedPref(SharedPreferenceConstants.CART_ID.toString(), ""))
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>()
+                {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result)
+                    {
+
+                        if (result!=null)
+                        {
+                            System.out.println("result--------------" + result);
+                            String message = result.get("message").getAsString();
+                            JsonObject jsonObject = result.getAsJsonObject("result");
+
+                            if (message.equals("Product Saved in Your Cart Successfully"))
+                            {
+
+                                String cart_count = jsonObject.get("total_cart_items").getAsString();
+
+                                System.out.println("cart_count-"+cart_count);
+
+                                appSharedPreference.setSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), Integer.valueOf(cart_count));
+
+                                ActionItemBadge.update(((AppCompatActivity) context), new_menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black), ActionItemBadge.BadgeStyles.GREY, appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(),0));
+
+
+                                //int j = appSharedPreference.getSharedPrefInt("cart_count",0);
+                                //ShopAllProductActivity.tvCartCount.setText(String.valueOf(appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0)));
+
+                                AndroidUtils.showToast(context, "Product Successfully Added on Cart.");
+                                progressBarHandler.hide();
+
+                            }
+                            else
+                            {
+
+                                progressBarHandler.hide();
+                                AndroidUtils.showToast(context, message);
+                            }
+
+                        }
+                        else
+                        {
+                            progressBarHandler.hide();
+                            AndroidUtils.showToast(context, "Server is not responding. Please try again.");
+
+                        }
+
+                    }
+                });
+
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
+                , ActionItemBadge.BadgeStyles.GREY,  appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0));
+
+        return super.onPrepareOptionsMenu(menu);
     }
 
 }

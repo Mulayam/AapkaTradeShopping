@@ -704,6 +704,7 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/buutonAdd_toCart"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"

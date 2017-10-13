@@ -27,10 +27,11 @@
         </activity>
         <activity
             android:name=".login.LoginActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".login.RegistrationActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="stateHidden"
+            />
         <activity android:name=".dashboard.DashboardActivity" />
         <activity android:name=".discover.DiscoverActivity" />
 

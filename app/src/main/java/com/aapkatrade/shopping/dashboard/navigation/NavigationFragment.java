@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,16 +25,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aapkatrade.shopping.Account.User_account;
+import com.aapkatrade.shopping.AndroidUtils;
 import com.aapkatrade.shopping.ChangePassword.change_password;
 import com.aapkatrade.shopping.Editprofile.Edit_profile_activity;
 import com.aapkatrade.shopping.Helpcenter.Help_center;
 import com.aapkatrade.shopping.ProductCategory.Productlist_category_activity;
 import com.aapkatrade.shopping.R;
 import com.aapkatrade.shopping.general.Connetivity_check;
+import com.aapkatrade.shopping.general.SharedPreferenceConstants;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.mikepenz.actionitembadge.library.ActionItemBadge;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -167,19 +171,12 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
             List<String> help_center = new ArrayList<String>();
             List<String> share_app = new ArrayList<String>();
 
-            listDataChild.put(listDataHeader.get(0), categoryname); // Header, Child data
+            listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
             listDataChild.put(listDataHeader.get(1), account); // Header, Child data
             listDataChild.put(listDataHeader.get(2), Settings_data);
             listDataChild.put(listDataHeader.get(3), ratethisapp); // Header, Child data
             listDataChild.put(listDataHeader.get(4), help_center); // Header, Child data
             listDataChild.put(listDataHeader.get(5), share_app);
-
-
-
-
-
-
-
 
 
 
@@ -490,11 +487,70 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
 
 
+    private void callwebservice__add_tocart_update(String product_id, String qty)
+    {
+      //  progressBarHandler.show();
+
+        String login_url = context.getResources().getString(R.string.webservice_base_url);
+
+        Ion.with(context)
+                .load(login_url)
+                .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("type", "cart_add")
+                .setBodyParameter("pid", product_id)
+                .setBodyParameter("qty",qty)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>()
+                {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result)
+                    {
+
+                        if (result!=null)
+                        {
+                            System.out.println("result--------------" + result);
+                            String message = result.get("message").getAsString();
+                            JsonObject jsonObject = result.getAsJsonObject("category");
+
+                            JsonArray jsonProductList = jsonObject.getAsJsonArray("children");
+                            JsonObject jsonproduct = (JsonObject) jsonProductList.get(0);
+
+                            JsonArray category_menu = jsonproduct.getAsJsonArray("children");
+
+                            for (int i = 0; i < category_menu.size(); i++)
+                            {
+                                JsonObject menu = (JsonObject) jsonProductList.get(i);
+                                String main_menu_name = menu.get("menu").getAsString();
+                                String main_menu_id = menu.get("category_id").getAsString();
 
 
+                                JsonArray submenu = menu.getAsJsonArray("children");
+
+                                for (int j = 0; j < submenu.size(); j++)
+                                {
+                                    JsonObject sub_menu = (JsonObject) jsonProductList.get(i);
+                                    String sub_menu_name = menu.get("menu").getAsString();
+                                    String sub_menu_id = menu.get("category_id").getAsString();
 
 
+                                }
 
+
+                            }
+
+
+                        }
+                        else
+                        {
+                           // progressBarHandler.hide();
+                            AndroidUtils.showToast(context, "Server is not responding. Please try again.");
+                        }
+
+                    }
+                });
+
+    }
 
 
 }

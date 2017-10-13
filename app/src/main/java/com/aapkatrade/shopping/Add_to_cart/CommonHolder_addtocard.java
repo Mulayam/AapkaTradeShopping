@@ -11,12 +11,15 @@ import com.aapkatrade.shopping.R;
 /**
  * Created by abcd on 9/1/2016.
  */
-public class CommonHolder_addtocard extends RecyclerView.ViewHolder {
+public class CommonHolder_addtocard extends RecyclerView.ViewHolder
+{
     CardView cardview;
     Spinner spinner;
     LinearLayout linearLayoutQuantity;
     TextView tvquantity;
-    public CommonHolder_addtocard(View itemView) {
+
+    public CommonHolder_addtocard(View itemView)
+    {
         super(itemView);
         cardview= (CardView) itemView.findViewById(R.id.cardview_addtocard);
         spinner=(Spinner)itemView.findViewById(R.id.spinner_addto_card);

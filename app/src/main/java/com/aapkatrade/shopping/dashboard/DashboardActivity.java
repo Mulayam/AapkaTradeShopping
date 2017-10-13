@@ -17,33 +17,50 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.aapkatrade.shopping.Account.Mywishlist.MyWishlist_activity;
+import com.aapkatrade.shopping.Add_to_cart.Add_to_card_activity;
 import com.aapkatrade.shopping.R;
 
 import com.aapkatrade.shopping.dashboard.dashboardcontentnew.DashboardFragment;
 import com.aapkatrade.shopping.dashboard.navigation.NavigationFragment;
+import com.aapkatrade.shopping.general.AppSharedPreference;
+import com.aapkatrade.shopping.general.SharedPreferenceConstants;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.mikepenz.actionitembadge.library.ActionItemBadge;
 
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity
+{
 
     private NavigationFragment drawer;
     private Toolbar toolbar;
     private DashboardFragment homeFragment;
     public static String username,mobno,email,Lastname,dob;
     private AHBottomNavigation bottomNavigation;
-   CoordinatorLayout coordinatorLayout;
+    CoordinatorLayout coordinatorLayout;
     Context context;
+    public static TextView menu_badge;
+    AppSharedPreference appSharedPreference;
+    Menu new_menu;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        menu_badge = (TextView) findViewById(R.id.menu_badge);
+
         context = this;
+
+        appSharedPreference = new AppSharedPreference(context);
+
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setupToolBar();
@@ -70,7 +87,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
-    private void setupNavigationCustom() {
+    private void setupNavigationCustom()
+    {
         drawer = (NavigationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
         drawer.setup(R.id.fragment, (DrawerLayout) findViewById(R.id.drawer), toolbar);
     }
@@ -78,10 +96,26 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        new_menu = menu;
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.dashboard, menu);
-        ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
-                , ActionItemBadge.BadgeStyles.GREY, 3);
+
+        invalidateOptionsMenu();
+
+        if (appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0)==0)
+        {
+            ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
+                    , ActionItemBadge.BadgeStyles.GREY, 0);
+
+        }
+        else
+        {
+            ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
+                    , ActionItemBadge.BadgeStyles.GREY,  appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0));
+        }
+
+
         return true;
     }
 
@@ -117,7 +151,7 @@ public class DashboardActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.add_to_cart:
                 //finish();
-                Intent i =new Intent(DashboardActivity.this, MyWishlist_activity.class);
+                Intent i =new Intent(DashboardActivity.this, Add_to_card_activity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
                 return true;
@@ -218,7 +252,24 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+       /* ActionItemBadge.update(((AppCompatActivity) context), new_menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
+                , ActionItemBadge.BadgeStyles.GREY,  appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0));
+        */
+    }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+
+        ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
+                , ActionItemBadge.BadgeStyles.GREY,  appSharedPreference.getSharedPrefInt(SharedPreferenceConstants.CART_COUNT.toString(), 0));
+
+        return super.onPrepareOptionsMenu(menu);
+    }
 
 
 }
