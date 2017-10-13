@@ -14,12 +14,15 @@ import android.util.Log;
 
 import com.aapkatrade.shopping.R;
 import com.aapkatrade.shopping.dashboard.DashboardActivity;
+import com.aapkatrade.shopping.general.SharedPreferenceConstants;
 import com.aapkatrade.shopping.login.LoginActivity;
 import com.aapkatrade.shopping.login.NewLoginActivity;
 import com.aapkatrade.shopping.login.RegistrationActivity;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
+
 import io.fabric.sdk.android.Fabric;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Array;
@@ -31,15 +34,15 @@ public class MainActivity extends AppCompatActivity {
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "mJegq8vndKRYDrYAT590xEpcp";
     private static final String TWITTER_SECRET = "uuM0EuSuS8DvXloLfOpmoXUgIf2q1bmD2GPdkS2rjncsPvvxvB";
-    SharedPreferences sharedpreferences;
+    AppSharedPreference sharedpreferences;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
         setContentView(R.layout.activity_main);
+        sharedpreferences = new AppSharedPreference(MainActivity.this);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -59,40 +62,37 @@ public class MainActivity extends AppCompatActivity {
                 } catch (NoSuchAlgorithmException e) {
 
                 }
-                sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-                String user_id=sharedpreferences.getString("user_id",null);
-                /*if(user_id==null)
-                {
 
-                    SharedPreferences.Editor editor=sharedpreferences.edit();
-                    editor.putString("user_id", "45543");
-                    editor.putString("login_type", "0");
-                    editor.commit();
-                    Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+
+                String user_id = sharedpreferences.getSharedPref(SharedPreferenceConstants.USER_ID.toString(), "0");
+
+                Log.e("userid", user_id);
+                if (user_id.equals("0")) {
+
+
+                    Intent intent = new Intent(MainActivity.this, NewLoginActivity.class);
 
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.enter, R.anim.exit);
+                    finish();
+                } else {
+                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
                     overridePendingTransition(R.anim.enter, R.anim.exit);
                     finish();
                 }
-                else{
-                    Intent intent=new Intent(MainActivity.this, DashboardActivity.class);
 
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-
-                    overridePendingTransition(R.anim.enter, R.anim.exit);
-                    finish();
-                }*/
-
-               Intent intent=new Intent(MainActivity.this, NewLoginActivity.class);
+             /*  Intent intent=new Intent(MainActivity.this, NewLoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                overridePendingTransition(R.anim.enter, R.anim.exit);
-
+                overridePendingTransition(R.anim.enter, R.anim.exit);*/
 
 
             }
