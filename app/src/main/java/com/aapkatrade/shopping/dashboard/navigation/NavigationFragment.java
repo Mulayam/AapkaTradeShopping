@@ -57,7 +57,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NavigationFragment extends Fragment implements View.OnClickListener, ExpandableListAdapter.clickListner {
+public class NavigationFragment extends Fragment implements View.OnClickListener, ExpandableListAdapter.clickListner
+{
 
     public static final String preFile = "textFile";
     public static final String userKey = "key";
@@ -69,14 +70,13 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     private static final int IMAGE_PICKER_SELECT = 999;
     boolean mFromSavedInstance;
     View view;
+   public static ArrayList<Category_data> category_data = new ArrayList<>();
+    ArrayList<String> categoryName = new ArrayList<>();
     String Fname,Lname,Dob;
-
     public static final String PREFS_NAME = "call_recorder";
     private SharedPreferences loginPreferences;
     List<String> categoryids;
     List<String> categoryname;
-
-
     public static SharedPreferences.Editor loginPrefsEditor;
     private Context context;
     TextView footer;
@@ -97,16 +97,19 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_navigation, container, false);
         _progressDialog=new ProgressDialog(context);
-        initView();
+
+        callwebservice__category();
+
+
         return view;
     }
 
-    private void initView() {
+    private void initView()
+    {
         //prepare textviewdata
         categoryname=new ArrayList<>();
         categoryids=new ArrayList<>();
@@ -129,7 +132,6 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
 
 
-
         // preparing list data
         if(Connetivity_check.isNetworkAvailable(getActivity())==true)
         { /*prepareListData();*/
@@ -147,20 +149,6 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
             listDataHeader.add("Help Centre");
 
             // Adding child data
-            List<String> top250 = new ArrayList<String>();
-            top250.add("Woman's Clothings");
-            top250.add("Man's Clothings");
-            top250.add("Electronics");
-            top250.add("Home and Garden");
-            top250.add("Jwellery and Health");
-            top250.add("Automotive");
-            top250.add("Beauty and Health");
-            top250.add("Toys, Kids and Baby");
-            top250.add("Bags and Shoes");
-            top250.add("Sports and Outdoor");
-            top250.add("Phone and Accessories");
-            top250.add("Computer and Networking");
-            top250.add("VIEW ALL CATEGORIES");
 
             List<String> Settings_data = new ArrayList<String>();
             Settings_data.add("Subscription");
@@ -171,14 +159,12 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
             List<String> help_center = new ArrayList<String>();
             List<String> share_app = new ArrayList<String>();
 
-            listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
+            listDataChild.put(listDataHeader.get(0), categoryName); // Header, Child data
             listDataChild.put(listDataHeader.get(1), account); // Header, Child data
             listDataChild.put(listDataHeader.get(2), Settings_data);
             listDataChild.put(listDataHeader.get(3), ratethisapp); // Header, Child data
             listDataChild.put(listDataHeader.get(4), help_center); // Header, Child data
             listDataChild.put(listDataHeader.get(5), share_app);
-
-
 
 
         }
@@ -487,9 +473,9 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
 
 
-    private void callwebservice__add_tocart_update(String product_id, String qty)
+    private void callwebservice__category()
     {
-      //  progressBarHandler.show();
+        //  progressBarHandler.show();
 
         String login_url = context.getResources().getString(R.string.webservice_base_url);
 
@@ -497,9 +483,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
                 .load(login_url)
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                .setBodyParameter("type", "cart_add")
-                .setBodyParameter("pid", product_id)
-                .setBodyParameter("qty",qty)
+                .setBodyParameter("type", "get_category")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>()
                 {
@@ -510,35 +494,37 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
                         if (result!=null)
                         {
                             System.out.println("result--------------" + result);
-                            String message = result.get("message").getAsString();
                             JsonObject jsonObject = result.getAsJsonObject("category");
 
                             JsonArray jsonProductList = jsonObject.getAsJsonArray("children");
+
                             JsonObject jsonproduct = (JsonObject) jsonProductList.get(0);
 
                             JsonArray category_menu = jsonproduct.getAsJsonArray("children");
 
+                            System.out.println("category_menu--------------" + category_menu.size());
+
+                             // Log.d("category_menu",category_menu.toString());
+
                             for (int i = 0; i < category_menu.size(); i++)
                             {
-                                JsonObject menu = (JsonObject) jsonProductList.get(i);
-                                String main_menu_name = menu.get("menu").getAsString();
+                                JsonObject menu = (JsonObject) category_menu.get(i);
+                                String main_menu_name = menu.get("name").getAsString();
                                 String main_menu_id = menu.get("category_id").getAsString();
 
+                                category_data.add(new Category_data(main_menu_id,main_menu_name));
+                                categoryName.add(main_menu_name);
 
-                                JsonArray submenu = menu.getAsJsonArray("children");
+                              /* JsonArray submenu = menu.getAsJsonArray("children");
 
                                 for (int j = 0; j < submenu.size(); j++)
                                 {
                                     JsonObject sub_menu = (JsonObject) jsonProductList.get(i);
-                                    String sub_menu_name = menu.get("menu").getAsString();
+                                    String sub_menu_name = menu.get("name").getAsString();
                                     String sub_menu_id = menu.get("category_id").getAsString();
-
-
-                                }
-
-
+                                }*/
                             }
-
+                            initView();
 
                         }
                         else
