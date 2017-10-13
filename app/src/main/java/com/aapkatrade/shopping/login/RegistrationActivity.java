@@ -209,6 +209,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
                             if (result.get("status").getAsString().equals("success"))
                             {
+
                                 progressBarHandler.hide();
                                 appSharedPreference.setSharedPref(SharedPreferenceConstants.CUSTOMER_ID.toString(), "notlogin");
                                 //Toast.makeText(RegistrationActivity.this,result.get("message").getAsString(),Toast.LENGTH_SHORT).show();
