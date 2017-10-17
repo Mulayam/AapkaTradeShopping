@@ -30,8 +30,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".login.RegistrationActivity"
-            android:windowSoftInputMode="stateHidden"
-            />
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".dashboard.DashboardActivity" />
         <activity android:name=".discover.DiscoverActivity" />
 
@@ -80,7 +79,9 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".ProductCategory.Top_selling.top_selling_viewall.Topselling_viewall" />
         <activity android:name=".ProductCategory.sub_category_brands_offers.sub_category_viewall_offer.Viewall_offer_all" />
-        <activity android:name=".login.NewLoginActivity"></activity>
+        <activity android:name=".login.NewLoginActivity" />
+        <activity android:name=".subcategory.SubcategoryActivity" />
+        <activity android:name=".expandable_example.Main2Activity"></activity>
     </application>
 
 </manifest>

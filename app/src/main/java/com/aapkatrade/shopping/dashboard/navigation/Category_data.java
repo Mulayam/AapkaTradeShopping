@@ -24,7 +24,7 @@ public class Category_data {
         this.name = name;
     }
 
-    Category_data(String id , String name)
+    public Category_data(String id, String name)
     {
         this.id= id;
         this.name = name;
