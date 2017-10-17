@@ -20,7 +20,9 @@ import android.widget.Toast;
 import com.aapkatrade.shopping.R;
 import com.aapkatrade.shopping.category.CategoryActivity;
 import com.aapkatrade.shopping.discover.DiscoverActivity;
+import com.aapkatrade.shopping.expandable_example.Main2Activity;
 import com.aapkatrade.shopping.search.SearchActivity;
+import com.aapkatrade.shopping.subcategory.SubcategoryActivity;
 
 import java.util.ArrayList;
 
@@ -153,7 +155,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         switch (view.getId()) {
             case R.id.buttonDiscover:
                 showMessage("Clicked");
-                intent=new Intent(context, DiscoverActivity.class);
+                intent=new Intent(context, Main2Activity.class);
                 startActivity(intent);
                 ((AppCompatActivity)context).overridePendingTransition(R.anim.enter, R.anim.exit);
                 break;

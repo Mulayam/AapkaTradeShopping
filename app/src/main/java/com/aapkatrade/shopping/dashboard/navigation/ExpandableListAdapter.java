@@ -37,18 +37,20 @@ import javax.net.ssl.X509TrustManager;
  * Created by Netforce on 7/12/2016.
  */
 
-public class ExpandableListAdapter extends BaseExpandableListAdapter implements CompoundButton.OnCheckedChangeListener {
+public class ExpandableListAdapter extends BaseExpandableListAdapter implements CompoundButton.OnCheckedChangeListener
+{
 
     private Context _context;
     private List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
     private HashMap<String, List<String>> _listDataChild;
     private clickListner click;
-   public static ToggleButton tg_button;
+    public static ToggleButton tg_button;
     ProgressDialog _progressDialog;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader,
-                                 HashMap<String, List<String>> listChildData) {
+
+    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listChildData)
+    {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -56,7 +58,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosititon) {
+    public Object getChild(int groupPosition, int childPosititon)
+    {
         return this._listDataChild.get(this._listDataHeader.get(groupPosition))
                 .get(childPosititon);
     }
