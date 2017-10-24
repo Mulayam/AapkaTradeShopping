@@ -155,7 +155,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         switch (view.getId()) {
             case R.id.buttonDiscover:
                 showMessage("Clicked");
-                intent=new Intent(context, Main2Activity.class);
+                intent=new Intent(context, SubcategoryActivity.class);
                 startActivity(intent);
                 ((AppCompatActivity)context).overridePendingTransition(R.anim.enter, R.anim.exit);
                 break;

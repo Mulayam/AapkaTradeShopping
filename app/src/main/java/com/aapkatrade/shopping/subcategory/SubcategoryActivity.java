@@ -128,18 +128,13 @@ public class SubcategoryActivity extends AppCompatActivity
 
                                        sub_category_data.add(new Category_data(sub_menu_name,sub_menu_id));
                                        sub_categoryName.add(sub_menu_name);
-
-
-                                       if (j==jsonArraysubmenu.size()-1)
-                                       {
-                                           System.out.println("sub_categoryName--"+sub_categoryName.toString());
-                                           listDataChild.put(categoryName.get(i), sub_categoryName);
-                                       }
                                    }
 
 
 
                                }
+                                listDataChild.put(categoryName.get(0), sub_categoryName);
+                                listDataChild.put(categoryName.get(1), categoryName);
 
                             }
 
